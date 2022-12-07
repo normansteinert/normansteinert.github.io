@@ -257,7 +257,7 @@
 }
 
 .research-cont2-container {
-  background: #E5E7E9;
+  background: white; /* #E5E7E9; */
 }
 .research-cont2 {
   padding: 30px 0 30px 0;
@@ -348,7 +348,7 @@
   width: 70%;
 }
 .back-cont2-container {
-  background: white; /* #E5E7E9; */
+  background: #E5E7E9;
 }
 .back-cont2-container h1 {
   padding: 30px 0 0 0;
