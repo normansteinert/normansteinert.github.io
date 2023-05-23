@@ -1,5 +1,9 @@
 function citePDV2022() {
-  alert("@Article{e2021GL094273,\n AUTHOR = {de Vrese, P., G. Georgievski, J. F. Gonzalez Rouco, D. Notz, T. Stacke, <strong>N. J. Steinert</strong>, S. Wilkenskjeld, and V. Brovkin,},\n TITLE = {{Representation of soil hydrology in permafrost regions may explain large part of inter-model spread in simulated Arctic and subarctic climate}},\n JOURNAL = {The Cryosphere},\n VOLUME = {17},\n YEAR = {2023},\n NUMBER = {5},\n PAGES = {2095–-2118},\n URL = {https://tc.copernicus.org/articles/17/2095/2023/},\n DOI = {10.5194/tc-17-2095-2023}\n}");
+  alert("@Article{e2021GL094273,\n AUTHOR = {de Vrese, P., G. Georgievski, J. F. Gonzalez Rouco, D. Notz, T. Stacke, N. J. Steinert, S. Wilkenskjeld, and V. Brovkin,},\n TITLE = {{Representation of soil hydrology in permafrost regions may explain large part of inter-model spread in simulated Arctic and subarctic climate}},\n JOURNAL = {The Cryosphere},\n VOLUME = {17},\n YEAR = {2023},\n NUMBER = {5},\n PAGES = {2095–-2118},\n URL = {https://tc.copernicus.org/articles/17/2095/2023/},\n DOI = {10.5194/tc-17-2095-2023}\n}");
+}
+
+function citeJS2022() {
+  alert("@Article{e2021GL094273,\n AUTHOR = {Schwinger, J., A. Asaadi, N. J. Steinert, H. Lee,},\n TITLE = {{Emit now, mitigate later? Earth system reversibility under overshoots of different magnitude and durations}},\n JOURNAL = {Earth System Dynamics},\n VOLUME = {13},\n YEAR = {2022},\n NUMBER = {4},\n PAGES = {1641–1665},\n URL = {https://esd.copernicus.org/articles/13/1641/2022/esd-13-1641-2022.html},\n DOI = {10.5194/esd-13-1641-2022}\n}");
 }
 
 function citeNJS2021b() {
