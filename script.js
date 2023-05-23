@@ -1,3 +1,7 @@
+function citePDV2022() {
+  alert("@Article{e2021GL094273,\n AUTHOR = {de Vrese, P., G. Georgievski, J. F. Gonzalez Rouco, D. Notz, T. Stacke, <strong>N. J. Steinert</strong>, S. Wilkenskjeld, and V. Brovkin,},\n TITLE = {{Representation of soil hydrology in permafrost regions may explain large part of inter-model spread in simulated Arctic and subarctic climate}},\n JOURNAL = {The Cryosphere},\n VOLUME = {17},\n YEAR = {2023},\n NUMBER = {5},\n PAGES = {2095–-2118},\n URL = {https://tc.copernicus.org/articles/17/2095/2023/},\n DOI = {10.5194/tc-17-2095-2023}\n}");
+}
+
 function citeNJS2021b() {
   alert("@Article{e2021GL094273,\n AUTHOR = {Steinert, N. J., J. F. Gonz\'alez-Rouco, C. A. Melo Aguilar, F. Garc\'{\i}a-Pereira, E. Garc\'{\i}a-Bustamante, P. de Vrese, V. Alexeev, J. H. Jungclaus, S. J. Lorenz, S. Hagemann,},\n TITLE = {{Agreement of Analytical and Simulation-Based Estimates of the Required Land Depth in Climate Models}},\n JOURNAL = {Geophysical Research Letters},\n VOLUME = {48},\n YEAR = {2021},\n NUMBER = {20},\n NOTE = {e2021GL094273},\n URL = {https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2021GL094273},\n DOI = {10.1029/2021GL094273}\n}");
 }
