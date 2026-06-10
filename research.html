@@ -1,137 +1,253 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-682NPCQNMC"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research — Norman J. Steinert</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    .page-hero {
+      padding: 56px 48px 48px;
+      border-bottom: 0.5px solid var(--border);
+    }
 
-      gtag('config', 'G-682NPCQNMC');
-    </script>
-    
-    <!--meta data-->
-    <title>Norman J. Steinert</title>
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    
-  </head>
-  <body>
+    .page-title {
+      font-family: var(--serif);
+      font-size: 38px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
 
-    <!--nav start -->
-    <nav class="navigation">
-      <div class="container">
-        <div class="nav-ini">
-          <h1><a href="index.html">Norman J. Steinert, PhD</a></h1>
-        </div>
-        <div class="nav-items">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="background.html">Background</a></li>
-            <li><u><a href="research.html">Research</a></u></li>
-            <li><a href="publications.html">Publications</a></li>
-            <li><a href="outreach.html">Dissemination</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- nav end -->
-    
-    <div class="research">
-      <h1>Research Highlights</h1>
+    .page-intro {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text3);
+      max-width: 680px;
+    }
 
-      <div class="research-cont1-container"></div>
-        <div class="research-cont1">
-          <h2>1. Overconfidence in climate overshoot</h2>
-          <img src="images/research_CFS_2024.png" alt="image" width="500" height=auto>
-          <p>Global emission reduction efforts continue to be insufficient to meet the temperature goal of the Paris Agreement. This makes the systematic exploration of so-called overshoot pathways that temporarily exceed a targeted global warming limit before drawing temperatures back down to safer levels a priority for science and policy. Here we show that global and regional climate change and associated risks after an overshoot are different from a world that avoids it. We find that achieving declining global temperatures can limit long-term climate risks compared with a mere stabilization of global warming, including for sea-level rise and cryosphere changes. However, the possibility that global warming could be reversed many decades into the future might be of limited relevance for adaptation planning today. Temperature reversal could be undercut by strong Earth-system feedbacks resulting in high near-term and continuous long-term warming. To hedge and protect against high-risk outcomes, we identify the geophysical need for a preventive carbon dioxide removal capacity of several hundred gigatonnes. Yet, technical, economic and sustainability considerations may limit the realization of carbon dioxide removal deployment at such scales. Therefore, we cannot be confident that temperature decline after overshoot is achievable within the timescales expected today. Only rapid near-term emission reductions are effective in reducing climate risks.</p>
-          <p><a href="https://doi.org/10.1038/s41586-024-08020-9" title="Article"><i class="fa fa-external-link-alt"></i> Schleussner, C.-F., G. Ganti, Q. Lejeune, ..., <strong>N. J. Steinert</strong>, ..., et al.: <em>Overconfidence in climate overshoot</em>, <strong>Nature</strong>, 634, 366-373, 2024.</p>
-        </div>
-      </div>
+    /* ---- Research highlight card ---- */
+    .highlight {
+      padding: 44px 0;
+      border-bottom: 0.5px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
 
-      <div class="research-cont2-container"></div>
-        <div class="research-cont2">
-          <h2>2. Permafrost-thaw impacts despite the absence of a global tipping point</h2>
-          <img src="images/research_JN_2024.png" alt="image" width="600" height=auto>
-          <p>Arctic permafrost, the largest non-seasonal component of Earth's cryosphere, contains a substantial climate-sensitive carbon pool. The existence of a global tipping point, a warming threshold beyond which permafrost thaw would accelerate and become self-perpetuating, remains debated. Here we provide an integrative Perspective on this question, suggesting that despite several permafrost-thaw feedbacks driving rapid thaw and irreversible ground-ice loss at local to regional scales, the accumulated response of Arctic permafrost to climate warming remains quasilinear. We argue that in the absence of a global tipping point there is no safety margin within which permafrost loss would be acceptable. Instead, each increment of global warming subjects more land areas underlain by permafrost to thaw, causing detrimental local impacts and global feedbacks.</p>
-          <p><a href="https://doi.org/10.1038/s41558-024-02011-4" title="Article"><i class="fa fa-external-link-alt"></i> Nitzbon, J., T. Schneider von Deimling, M. Aliyeva, S. E. Chadburn, G. Grosse, S. Laboor, H. Lee, G. Lohmann, <strong>N. J. Steinert</strong>, S. M. Stuenzi, M. Werner, S. Westermann, and M. Langer: <em>No respite from permafrost-thaw impacts in absence of a global tipping point</em>, <strong>Nature Climate Change</strong>, 2024.</p>
-        </div>
-      </div>
+    .highlight:last-child { border-bottom: none; }
 
-      <div class="research-cont1-container">
-        <div class="research-cont1">
-          <h2>3. Underestimated Land Heat Uptake Alters the Global Energy Distribution in CMIP6 Climate Models</h2>
-          <img src="images/research_NJS_2024.png" alt="image" width="800" height=auto>
-          <p>Current global warming results in an uptake of heat by the Earth system, which is distributed among the different components of the climate system. However, current-generation climate models deliver heat inventory and partitioning estimates of Earth system components that differ from recent observations. Here we investigate the global heat distribution under warming by using fully-coupled CMIP6 Earth system model experiments, including a version of the MPI-ESM with a deep land model component, accommodating the required space for more realistic terrestrial heat storage. The results show that sufficiently deep land models exert increased subsurface land heat uptake, leading to a heat uptake partitioning among the Earth system components that is closer to observational estimates. The results are relevant for the understanding of Earth's heat partitioning and highlight the importance of the land heat sink in the Earth heat inventory.</p>
-          <p><a href="https://doi.org/10.1029/2023GL107613" title="Article"><i class="fa fa-external-link-alt"></i> <strong>Steinert, N. J.</strong>, M. V. Debolskiy, E. J. Burke, F. Garc&iacute;a-Pereira, and H. Lee: <em>Evaluating permafrost definitions for global permafrost area estimates in CMIP6 climate models</em>, <strong>Environmental Research Letters</strong>, 19(1), 014033, 2023.</p>
-        </div>
-      </div>
-      
-      <div class="research-cont2-container">
-        <div class="research-cont2">
-          <h2>4. Overshooting 1.5°C is fast becoming inevitable</h2>
-          <img src="images/research_10NICS-2023.png" alt="image" width="750" height=auto>
-          <p>The IPCC AR6 found that global warming is likely or very likely to exceed 1.5&deg;C relative to the pre-Industrial era in the near term (before 2040) under all but the very low greenhouse gas emissions scenarios (SSP1-1.9). Few pathways remain that avoid a 1.5&deg;C overshoot. Research since AR6 indicates overshooting 1.5&deg;C is all but inevitable in the near term. The world's ability to bring temperature down after exceeding 1.5°C warming depends on removing more CO2 from the atmosphere than is emitted, or net-negative CO2 emissions. There are significant unresolved questions regarding the feasibility, risks and effectiveness of CDR at scale, so achieving net-negative emissions is far from a given. If achieved, there will still be a delay of several years before the climate cools, due to lags in the carbon cycle and thermal response. Moreover, there is a risk that during overshoot the release of GHGs from natural carbon sinks could be triggered in ways not yet clearly anticipated. This could prolong the overshoot and increase the risk of irreversible impacts, and their potential magnitude. Widespread and potentially irreversible impacts worsen with higher magnitude and longer duration of overshoot. Exposure to extreme events, such as heatwaves, will exacerbate biodiversity loss and economic damage, particularly in tropical countries. Irreversible impacts are especially likely for marine biodiversity, with species facing the added pressure of prolonged ocean acidification after overshoot. Other irreversible changes (timescales of centuries or more) include permafrost carbon loss, sea-level rise from ocean thermal expansion, melting of ice sheets, and changes in ocean acidity, oxygenation and temperature. Furthermore, a long period above 2°C of warming carries a considerable risk of triggering self-perpetuating feedbacks leading to instabilities of the Greenland or West Antarctic ice sheets or mountain glaciers, largely irreversible even on timescales of centuries to millennia. The impacts could include several metres of sea-level rise in the long term, causing loss of land, livelihoods and cultural heritage in coastal communities and small island states, and irreversible degradation of mid-latitude coral reef species.</p>
-          <p><a href="https://www.cambridge.org/core/journals/global-sustainability/article/ten-new-insights-in-climate-science-20232024/F7F1C10C07FD241BFE30ACC4BA555A56" title="Article"><i class="fa fa-external-link-alt"></i> Bustamante, M., ..., <strong>N. J. Steinert</strong>, ..., et al.: Ten new insights in climate science 2023/2024. <strong>Global Sustainability</strong>, 2023.</p>
-          <p><a href="https://10insightsclimate.science" title="Report"><i class="fa fa-external-link-alt"></i> Future Earth, The Earth League, WCRP: 10 New Insights in Climate Science 2023/2024. Stockholm, 2023.</p>
-        </div>
-      </div>
+    .highlight-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
 
-      <div class="research-cont1-container">
-        <div class="research-cont1">
-          <h2>5. Reviewing the current knowledge on climate tipping point interactions and cascades</h2>
-          <img src="images/research_NW_2023.png" alt="image" width="700" height=auto>
-          <p>Climate tipping elements are large-scale subsystems of the Earth that may transgress critical thresholds (tipping points) under ongoing global warming, with substantial impacts on biosphere and human societies. Frequently studied examples of such tipping elements include the Greenland Ice Sheet, the Atlantic Meridional Overturning Circulation, permafrost, monsoon systems, and the Amazon rainforest. While recent scientific efforts have improved our knowledge about individual tipping elements, the interactions between them are less well understood. Also, the potential of individual tipping events to induce additional tipping elsewhere, or stabilize other tipping elements is largely unknown. Here, we map out the current state of the literature on the interactions between climate tipping elements and review the influences between them. To do so, we gathered evidence from model simulations, observations and conceptual understanding, as well as archetypal examples of paleoclimate reconstructions where multi-component or spatially propagating transitions were potentially at play. Lastly, we identify crucial knowledge gaps in tipping element interactions and outline how future research could address those gaps.</p>
-          <p><a href="https://doi.org/10.5194/egusphere-2023-1576" title="Article"><i class="fa fa-external-link-alt"></i> Wunderling, N., A. von der Heydt, ..., <strong>N. J. Steinert</strong>, ..., et al.: Climate tipping point interactions and cascades: A review. <strong>Earth System dynamics</strong>.</p>
-          <p><a href="https://global-tipping-points.org" title="Report"><i class="fa fa-external-link-alt"></i> T. M. Lenton, D.I. Armstrong McKay, S. Loriani, J.F. Abrams, S.J. Lade, J.F. Donges, M. Milkoreit, T. Powell, S.R. Smith, C. Zimm, J.E. Buxton, E. Bailey, L. Laybourn, A. Ghadiali, J.G. Dyke (eds), 2023, The Global Tipping Points Report 2023. University of Exeter, Exeter, UK.</p>
-        </div>
+    .highlight-num {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      white-space: nowrap;
+      padding-top: 4px;
+    }
+
+    .highlight-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--text);
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .highlight-body {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text3);
+    }
+
+    .highlight-cite {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-size: 13px;
+      color: var(--muted2);
+      line-height: 1.7;
+    }
+
+    .highlight-cite strong {
+      color: var(--text2);
+    }
+
+    .cite-journal {
+      font-style: italic;
+      color: var(--accent2);
+    }
+
+    .highlight-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .highlight-link:hover { color: var(--text2); }
+
+    @media (max-width: 700px) {
+      .page-hero { padding: 40px 20px 36px; }
+      .highlight { padding: 36px 0; }
+      .highlight-title { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <span class="nav-logo">Norman J. Steinert</span>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="background.html">Background</a></li>
+      <li><a href="research.html" class="active">Research</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="dissemination.html">Dissemination</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <h1 class="page-title">Research Highlights</h1>
+    <p class="page-intro">Selected contributions spanning climate overshoot, permafrost dynamics, Earth energy partitioning, and tipping point interactions — with a focus on the long-term reversibility of the Earth system under mitigation scenarios.</p>
+  </div>
+
+  <div class="page" style="padding-top: 0;">
+
+    <div class="highlight">
+      <div class="highlight-header">
+        <span class="highlight-num">01</span>
+        <h2 class="highlight-title">Overconfidence in climate overshoot</h2>
       </div>
-      
-      <div class="research-cont2-container">
-        <div class="research-cont2">
-          <h2>6. Future permafrost hydrology could have impacts beyond Arctic boundaries</h2>
-          <img src="images/research_PDV_2023.png" alt="image" width="700" height=auto>
-          <p>The current generation of Earth system models exhibits large inter-model differences in the simulated climate of the Arctic and subarctic zone, with differences in model structure and parametrizations being one of the main sources of uncertainty. One particularly challenging aspect in modelling is the representation of terrestrial processes in permafrost-affected regions, which are often governed by spatial heterogeneity far below the resolution of the models' land surface components. Here, we use the Max Planck Institute (MPI) Earth System Model to investigate how different plausible assumptions for the representation of permafrost hydrology modulate land–atmosphere interactions and how the resulting feedbacks affect not only the regional and global climate, but also our ability to predict whether the high latitudes will become wetter or drier in a warmer future. Focusing on two idealized setups that induce comparatively “wet” or “dry” conditions in regions that are presently affected by permafrost, we find that the parameter settings determine the direction of the 21st-century trend in the simulated soil water content and result in substantial differences in the land–atmosphere exchange of energy and moisture. The latter leads to differences in the simulated cloud cover during spring and summer and thus in the planetary energy uptake. The respective effects are so pronounced that uncertainties in the representation of the Arctic hydrological cycle can help to explain a large fraction of the inter-model spread in regional surface temperatures and precipitation. Furthermore, they affect a range of components of the Earth system as far to the south as the tropics. With both setups being similarly plausible, our findings highlight the need for more observational constraints on the permafrost hydrology to reduce the inter-model spread in Arctic climate projections.</p>
-          <p><a href="https://tc.copernicus.org/articles/17/2095/2023/tc-17-2095-2023.html" title="Article"><i class="fa fa-external-link-alt"></i> de Vrese, P., G. Georgievski, J. F. Gonzalez Rouco, D. Notz, T. Stacke, <strong>N. J. Steinert</strong>, S. Wilkenskjeld, and V. Brovkin: Representation of soil hydrology in permafrost regions may explain large part of inter-model spread in simulated Arctic and subarctic climate. <strong>The Cryosphere</strong>, 17(5), 2095–2118, 2023.</p>
-        </div>
+      <p class="highlight-body">
+        Global emission reduction efforts continue to fall short of Paris Agreement targets, making systematic exploration of overshoot pathways a priority for science and policy. This study shows that climate change risks after an overshoot differ substantially from a world that avoids it. Achieving declining global temperatures can limit long-term risks compared with mere stabilization, including for sea-level rise and cryosphere changes. However, strong Earth-system feedbacks could undercut temperature reversal, resulting in high near-term and continuous long-term warming. We identify a geophysical need for preventive carbon dioxide removal capacity of several hundred gigatonnes — yet technical, economic, and sustainability constraints may limit deployment at such scales.
+      </p>
+      <div class="highlight-cite">
+        <p>Schleussner, C.-F., G. Ganti, Q. Lejeune, ..., <strong>N. J. Steinert</strong>, ..., et al.: Overconfidence in climate overshoot. <span class="cite-journal">Nature</span>, 634, 366–373 (2024).</p>
+        <a class="highlight-link" href="https://doi.org/10.1038/s41586-024-08020-9" target="_blank">
+          <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1038/s41586-024-08020-9
+        </a>
       </div>
-      
-      <div class="research-cont1-container">
-        <div class="research-cont1">
-          <h2>7. Climate-driven impacts and human vulnerability increase the emergence of vulnerable regions</h2>
-          <img src="images/research_10NICS-2022.png" alt="image" width="700" height=auto>
-          <p>Many regions Many regions of the Earth show accelerated climate-related changes. In regions most vulnerable to climate change, physical, ecological and socioeconomic systems are losing resilience against further change. Consequently, large numbers of people and their livelihoods are affected due to the close interconnection of human and natural vulnerabilities. Socioeconomically vulnerable regions emerge on a global scale. Regional hotspots cluster in Central America, Asia, the Middle East and several regions of Africa: the Sahel, Central and East Africa, where socio-economic factors significantly contribute to human vulnerability. Each hotspot has its unique economic, ecological and political conditions. Gender inequality exacerbates vulnerability to large climate-driven impacts. An estimated 1.6 billion people live in regions of the highest category of vulnerability, whose populations are also predicted to double by 2050. Changes in climate dynamics due to global warming could lead to significant disturbances in regions characterized by human vulnerability. Furthermore, anthropogenic interference puts many ecosystems at high risk of structural and dynamic change, decreasing ecosystem services and resource availability for communities as well as reducing their climate mitigation capability. Vulnerability hotspots are also related to the loss of habitats and biodiversity decline. The close connection between socioeconomic drivers of vulnerability and human livelihoods is determined by access to resources and basic needs, such as food and water supplies.</p>
-          <p><a href="https://www.cambridge.org/core/journals/global-sustainability/article/ten-new-insights-in-climate-science-2022/62C90D59C9F9890791B64762EAA06B8D" title="Article"><i class="fa fa-external-link-alt"></i> Martin, M., ..., <strong>N. J. Steinert</strong>, ..., et al.: Ten new insights in climate science 2022. <strong>Global Sustainability</strong>, 5, e20, 1–20, 2022.</p>
-          <p><a href="https://10insightsclimate.science" title="Report"><i class="fa fa-external-link-alt"></i> Future Earth, The Earth League, WCRP: 10 New Insights in Climate Science 2022. Stockholm, 2022.</p>
-        </div>
-      </div>
-      
-      <div class="research-cont2-container">
-        <div class="research-cont2">
-          <h2>8. Earth system reversibility under temperature overshoots</h2>
-          <img src="images/research_IMPOSE1.png" alt="image" width="700" height=auto>
-          <p>Anthropogenic CO2 emissions cause irreversible climate change on centennial to millennial timescales, yet current mitigation efforts are insufficient to limit global warming to a level that is considered safe. Carbon dioxide removal (CDR) has been suggested as an option to partially reverse climate change and to return the Earth system to a less dangerous state after a period of temperature overshoot. Whether or to what extent such partial reversal of climate change under CDR would happen is, next to socio-economic feasibility and sustainability, key to assessing CDR as a mitigation option. Here, we use a state-of-the-art Earth system model that includes a representation of permafrost carbon to investigate the reversibility of the Earth system after overshoots of different durations and magnitudes in idealized simulations. We find that atmospheric CO2 concentrations are slightly lower after an overshoot, compared to a reference simulation without overshoot, due to a near-perfect compensation of carbon losses from land by increased ocean carbon uptake during the overshoot periods. The legacy of an overshoot is, on a centennial timescale, indiscernible (within natural variability) from a reference case without overshoot for many aspects of the Earth system including global average surface temperature, marine and terrestrial productivity, strength of the Atlantic meridional overturning circulation, surface ocean pH, surface O2 concentration, and permafrost extent, except in the most extreme overshoot scenario considered in this study. Consistent with previous studies, we find irreversibility in permafrost carbon and deep ocean properties like seawater temperature, pH, and O2 concentrations. We do not find any indication of tipping points or self-reinforcing feedbacks that would put the Earth system on a significantly different trajectory after an overshoot. Hence, the effectiveness of CDR in partially reversing large-scale patterns of climate change might not be the main issue of CDR but rather the impacts and risks that would occur during the period of elevated temperatures during the overshoot.</p>
-          <p><a href="https://esd.copernicus.org/articles/13/1641/2022/" title="Article"><i class="fa fa-external-link-alt"></i> Schwinger, J., A. Asaadi, <strong>N. J. Steinert</strong>, H. Lee: Emit now, mitigate later? Earth system reversibility under overshoots of different magnitude and durations. <strong>Earth System Dynamics</strong>, 13, 1641–1665, 2022.</p>
-        </div>
-      </div>
-      
-      <!--      
-      <h1>Research collaborations</h1>
-      
-      <div class="research-cont2-container">
-        <div class="research-cont2">
-          <img src="images/research_network.png" alt="image" width="750" height=auto>
-        </div>
-      </div>
-      -->      
     </div>
 
-    <footer class="footer">
-      &copy;2026 Norman J. Steinert
-    </footer>
+    <div class="highlight">
+      <div class="highlight-header">
+        <span class="highlight-num">02</span>
+        <h2 class="highlight-title">Permafrost-thaw impacts despite the absence of a global tipping point</h2>
+      </div>
+      <p class="highlight-body">
+        Arctic permafrost contains a substantial climate-sensitive carbon pool. The existence of a global tipping point — a warming threshold beyond which permafrost thaw would self-perpetuate — remains debated. This perspective argues that despite feedbacks driving rapid and irreversible thaw at local to regional scales, the accumulated Arctic permafrost response to warming remains quasilinear. Without a global tipping point, there is no safety margin within which permafrost loss is acceptable: each increment of warming exposes more land to thaw, driving detrimental local impacts and global feedbacks.
+      </p>
+      <div class="highlight-cite">
+        <p>Nitzbon, J., T. Schneider von Deimling, M. Aliyeva, ..., <strong>N. J. Steinert</strong>, ..., et al.: No respite from permafrost-thaw impacts in absence of a global tipping point. <span class="cite-journal">Nature Climate Change</span> (2024).</p>
+        <a class="highlight-link" href="https://doi.org/10.1038/s41558-024-02011-4" target="_blank">
+          <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1038/s41558-024-02011-4
+        </a>
+      </div>
+    </div>
 
-  </body>
+    <div class="highlight">
+      <div class="highlight-header">
+        <span class="highlight-num">03</span>
+        <h2 class="highlight-title">Underestimated land heat uptake in CMIP6 models</h2>
+      </div>
+      <p class="highlight-body">
+        Current global warming produces heat uptake distributed across all components of the climate system, but current-generation models deliver estimates that diverge from observations. Using fully-coupled CMIP6 experiments including an MPI-ESM version with a deep land model component, this work shows that sufficiently deep land models exhibit increased subsurface heat uptake — yielding an Earth system heat partitioning closer to observational estimates. Results highlight the importance of the land heat sink in global energy accounting.
+      </p>
+      <div class="highlight-cite">
+        <p><strong>Steinert, N. J.</strong>, F. J. Cuesta-Valero, F. García-Pereira, P. de Vrese, ..., J. F. González-Rouco: Underestimated Land Heat Uptake Alters the Global Energy Distribution in CMIP6 Climate Models. <span class="cite-journal">Geophysical Research Letters</span>, 51(10) (2024).</p>
+        <a class="highlight-link" href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2023GL107613" target="_blank">
+          <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1029/2023GL107613
+        </a>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <div class="highlight-header">
+        <span class="highlight-num">04</span>
+        <h2 class="highlight-title">Overshooting 1.5°C is fast becoming inevitable</h2>
+      </div>
+      <p class="highlight-body">
+        Research post-IPCC AR6 indicates that overshooting 1.5°C is all but inevitable in the near term. Returning below this threshold requires net-negative CO2 emissions, which carries significant feasibility uncertainties. During overshoot, natural carbon sinks could be triggered in ways not yet anticipated, prolonging elevated temperatures. Widespread and potentially irreversible impacts worsen with higher magnitude and longer overshoot duration, especially for marine biodiversity, ice sheets, and tropical regions. Self-perpetuating feedbacks at sustained warming above 2°C carry considerable risk of triggering ice sheet instabilities.
+      </p>
+      <div class="highlight-cite">
+        <p>Bustamante, M., ..., <strong>N. J. Steinert</strong>, ..., et al.: Ten new insights in climate science 2023/2024. <span class="cite-journal">Global Sustainability</span> (2024).</p>
+        <a class="highlight-link" href="https://www.cambridge.org/core/journals/global-sustainability/article/ten-new-insights-in-climate-science-20232024/F7F1C10C07FD241BFE30ACC4BA555A56" target="_blank">
+          <i class="ti ti-external-link" aria-hidden="true"></i> Global Sustainability
+        </a>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <div class="highlight-header">
+        <span class="highlight-num">05</span>
+        <h2 class="highlight-title">Climate tipping point interactions and cascades</h2>
+      </div>
+      <p class="highlight-body">
+        Climate tipping elements — including the Greenland Ice Sheet, AMOC, permafrost, monsoon systems, and the Amazon — may transgress critical thresholds under ongoing warming. While knowledge of individual tipping elements has improved, their interactions are less well understood. This review maps current understanding of tipping element interactions by gathering evidence from model simulations, observations, conceptual reasoning, and paleoclimate reconstructions. Key knowledge gaps are identified and future research directions outlined.
+      </p>
+      <div class="highlight-cite">
+        <p>Wunderling, N., A. von der Heydt, ..., <strong>N. J. Steinert</strong>, ..., et al.: Climate tipping point interactions and cascades: A review. <span class="cite-journal">Earth System Dynamics</span>, 15(1), 41–74 (2024).</p>
+        <a class="highlight-link" href="https://esd.copernicus.org/articles/15/41/2024/esd-15-41-2024.html" target="_blank">
+          <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.5194/esd-15-41-2024
+        </a>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <div class="highlight-header">
+        <span class="highlight-num">06</span>
+        <h2 class="highlight-title">Future permafrost hydrology and its far-reaching climate impacts</h2>
+      </div>
+      <p class="highlight-body">
+        Inter-model differences in Arctic–subarctic climate stem partly from how permafrost hydrology is represented in land surface components. Using the MPI Earth System Model, this study shows that contrasting but equally plausible assumptions about permafrost hydrology determine whether simulated 21st-century soil moisture trends are wet or dry — with cascading effects on cloud cover, planetary energy uptake, and regional temperatures. These uncertainties affect the Earth system as far south as the tropics and highlight the need for stronger observational constraints on permafrost hydrology.
+      </p>
+      <div class="highlight-cite">
+        <p>de Vrese, P., G. Georgievski, ..., <strong>N. J. Steinert</strong>, ..., V. Brovkin: Representation of soil hydrology in permafrost regions may explain large part of inter-model spread in simulated Arctic and subarctic climate. <span class="cite-journal">The Cryosphere</span>, 17(5), 2095–2118 (2023).</p>
+        <a class="highlight-link" href="https://tc.copernicus.org/articles/17/2095/2023/" target="_blank">
+          <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.5194/tc-17-2095-2023
+        </a>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <div class="highlight-header">
+        <span class="highlight-num">07</span>
+        <h2 class="highlight-title">Earth system reversibility under temperature overshoots</h2>
+      </div>
+      <p class="highlight-body">
+        Carbon dioxide removal has been proposed as a means to partially reverse climate change after a period of temperature overshoot. Using a state-of-the-art Earth system model with explicit permafrost carbon representation, this study investigates reversibility across overshoot scenarios of varying duration and magnitude. For most large-scale indicators — surface temperature, marine and terrestrial productivity, AMOC strength — the legacy of an overshoot is indiscernible from a reference case on centennial timescales. Irreversibility is found for permafrost carbon and deep ocean properties. No evidence of tipping points or self-reinforcing feedbacks was detected.
+      </p>
+      <div class="highlight-cite">
+        <p>Schwinger, J., A. Asaadi, <strong>N. J. Steinert</strong>, H. Lee: Emit now, mitigate later? Earth system reversibility under overshoots of different magnitude and durations. <span class="cite-journal">Earth System Dynamics</span>, 13, 1641–1665 (2022).</p>
+        <a class="highlight-link" href="https://esd.copernicus.org/articles/13/1641/2022/" target="_blank">
+          <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.5194/esd-13-1641-2022
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /page -->
+
+  <footer class="footer">
+    <span>© 2026 Norman J. Steinert</span>
+    <a href="https://cicero.oslo.no" target="_blank">
+      CICERO Centre for International Climate Research
+      <i class="ti ti-external-link" aria-hidden="true"></i>
+    </a>
+  </footer>
+
+</body>
 </html>

@@ -1,417 +1,540 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-682NPCQNMC"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Background — Norman J. Steinert</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    .page-hero {
+      padding: 56px 48px 48px;
+      border-bottom: 0.5px solid var(--border);
+    }
 
-      gtag('config', 'G-682NPCQNMC');
-    </script>
-    
-    <!--meta data-->
-    <title>Norman J. Steinert</title>
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    
-  </head>
-  <body>
+    .page-title {
+      font-family: var(--serif);
+      font-size: 38px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
 
-    <!--nav start -->
-    <nav class="navigation">
-      <div class="container">
-        <div class="nav-ini">
-          <h1><a href="index.html">Norman J. Steinert, PhD</a></h1>
-        </div>
-        <div class="nav-items">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><u><a href="background.html">Background</a></u></li>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="publications.html">Publications</a></li>
-            <li><a href="outreach.html">Dissemination</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- nav end -->
-    
-    <div class="background">
-      
-      <h1><i class="fa fa-user-alt"></i> Profile</h1>
-      <div class="back-cont1-container">
-        <div class="back-cont1-left">
-          <p>I am a physical climate scientist, currently working at the CICERO Center for International Research in Oslo,
-              Norway. My research investigates climate change mitigation scenarios and Earth system reversibility, and
-              the role of tipping points in shaping long-term Earth system responses to climate change. This work focuses
-              on self-amplifying climate feedbacks and their implications for climate mitigation scenarios. By combining
-              Earth system models with reduced-complexity climate emulators, my research advances the understanding
-              of climate feedbacks, their potential irreversibility under overshoot, and the risks they pose to achieving
-              climate stabilization. Another major strand of my research focuses on the role of the land surface in the
-              Earth system, with an emphasis on land-climate interactions, terrestrial carbon cycle dynamics, including
-              permafrost-carbon release and high-latitude ecosystem stability under climate change.</p>
-          
-          <p>Find my CV here: 
-            <a href="pubs/CV_Steinert_20260210.pdf" title="CV">
-              <i class="fa fa-file"></i>
-            </a>
-          </p>
-        </div>
-        <div class="back-cont1-right">
-          <h2>Interests</h2>
-          <ul>
-            <li>Climate Change</li>
-            <li>Carbon Cycle</li>
-            <li>Terrestrial Ecosystems</li>
-            <li>Permafrost</li>
-            <li>Climate Feedbacks</li>
-            <li>Tipping Points</li>
-            <li>Earth System Modelling</li>
-            <li>Climate Emulators</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="back-cont2-container">
-        <h1><i class="fa fa-graduation-cap"></i> Education</h1>
-        <div class="back-cont2">
-          
-          <!-- Education start -->
-          <div id="resume" class="resume">
-            <div class="container">
-              <div class="resume-text">
-                <div>
-                  <div>
-                    
-                    <div class="wrapper-box">
-                      <div class="wrapper">
-                        <p class="head-block-left">Complutense University of Madrid</p>
-                        <p class="head-block-right">Madrid, Spain</p>
-                      </div>
-                    </div>
-                    <div class="wrapper-text">
-                      <p class="block-left">Ph.D in Physics</p>
-                      <p class="block-right">Oct 2017 - Dec 2021</p>
-                    </div>
-                    <div class="wrapper-box">
-                      <div class="wrapper">
-                        <p class="head-block-left">Free University of Berlin</p>
-                        <p class="head-block-right">Berlin, Germany</p>
-                      </div>
-                    </div>
-                    <div class="wrapper-text">
-                      <p class="block-left">M.Sc. in Meteorology</p>
-                      <p class="block-right">Oct 2013 - Jul 2017</p>
-                    </div>
-                    <div class="wrapper-text">
-                      <p class="block-left">B.Sc. in Meteorology</p>
-                      <p class="block-right">Oct 2010 - Sept 2013</p>
-                    </div>
-                  </div>
+    .page-intro {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text3);
+      max-width: 700px;
+      margin-bottom: 24px;
+    }
 
-              </div>
-            </div>
-          </div>
-          <!-- Education end -->
-          
-        </div>
-      </div>
-      
-      <div class="back-cont3-container">
-        <h1><i class="fa fa-briefcase"></i> Employment</h1>
-        <div class="back-cont3">
-          
-          <!-- Employment start -->
-          <div id="employment" class="employment">
-            <div class="container">
-              <div class="employment-text">
-                <div>
+    /* ---- Timeline / Employment ---- */
+    .timeline-entry {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0 28px;
+      padding: 28px 0;
+      border-bottom: 0.5px solid var(--border);
+    }
 
-                  <div class="wrapper-box">
-                    <div class="wrapper">
-                      <p class="head-block-left">CICERO - Centre for International Climate Research</p>
-                      <p class="head-block-right">Oslo, Norway</p>
-                    </div>
-                    <div>
-                      <div class="wrapper-text">
-                        <p class="block-left">Senior Researcher</p>
-                        <p class="block-right">Jan 2024 - present</p>
-                      </div>
-                    </div>
-                    <div>
-                      <ul class="wrapper-list">
-                        <li>Analyze large ensembles from Simple and Conceptual Climate Models</li>
-                        <li>Assessing the climate impacts and reversibility processes of climate change mitigation scenarios</li>
-                        <li>Investigating climate feedbacks and interactions in various Model Intercomparison Projects</li>
-                        <li>Quantifying the permafrost carbon feedback under climate change</li>
-                      </ul>
-                    </div>
-                  
-                  <div class="wrapper-box">
-                    <div class="wrapper">
-                      <p class="head-block-left">NORCE - Norwegian Research Centre</p>
-                      <p class="head-block-right">Bergen, Norway</p>
-                    </div>
-                    <div>
-                      <div class="wrapper-text">
-                        <p class="block-left">Postdoc</p>
-                        <p class="block-right">Jan 2022 - Dec 2023</p>
-                      </div>
-                    </div>
-                    <div>
-                      <ul class="wrapper-list">
-                        <li>Land-climate interaction, particularly high latitude ecosystems, using CLM/NorESM</li>
-                        <li>Studying the carbon-climate feedbacks in the frame of CMIP6</li>
-                        <li>Assessing the role of permafrost as a climate tipping element</li>
-                        <li>Quantifying the climate impacts and reversibility processes of emission overshoot scenarios</li>
-                      </ul>
-                    </div>
-                    
-                    <div class="wrapper">
-                      <p class="head-block-left">Global Forecasters - CIEMAT</p>
-                      <p class="head-block-right">Madrid, Spain</p>
-                    </div>
-                    <div>
-                      <div class="wrapper-text">
-                        <p class="block-left">Research assistant</p>
-                        <p class="block-right">May 2017 - Sept 2017</p>
-                      </div>
-                    </div>
-                    <div>
-                      <ul class="wrapper-list">
-                        <li>Implementing soil physical modifications to the JSBACH Land Surface Model</li>
-                        <li>Analyzing sensitivity of climate-change simulations to modified subsurface physical parameterizations</li>
-                        <li>Investigation of land-atmosphere interaction processes in climate-change simulations</li>
-                        <li>Quantifying the role of the land in the global heat inventory</li>
-                      </ul>
-                    </div>
-                    
-                    <div class="wrapper-box">
-                      <div class="wrapper">
-                        <p class="head-block-left">Reuniwatt</p>
-                        <p class="head-block-right">La Reunion, France</p>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="wrapper-text">
-                        <p class="block-left">Internship</p>
-                        <p class="block-right">Oct 2016 - Apr 2017</p>
-                      </div>
-                    </div>
-                    <div>
-                      <ul class="wrapper-list">
-                        <li>Implementing optimized solar irradiance configurations in the WRF regional weather forecasting model</li>
-                        <li>Production and evaluation of WRF hindcast datasets</li>
-                        <li>Design and development of an automatic system for finding optimal WRF configurations</li>
-                      </ul>
-                    </div>
-                    
-                    <div class="wrapper-box">
-                      <div class="wrapper">
-                        <p class="head-block-left">MPI - Max Planck Institute for Meteorology</p>
-                        <p class="head-block-right">Hamburg, Germany</p>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="wrapper-text">
-                        <p class="block-left">Student assistant</p>
-                        <p class="block-right">Mar 2015 - Sept 2016</p>
-                      </div>
-                    </div>
-                    <div>
-                      <ul class="wrapper-list">
-                        <li>Implementing a flow field correction data assimilation to the MPI-Earth System Model</li>
-                        <li>Performing and analyzing MPI-ESM model experiments</li>
-                      </ul>
-                    </div>
-                    
-                    <div class="wrapper-box">
-                      <div class="wrapper">
-                        <p class="head-block-left">Institute for Meteorology - Free University of Berlin</p>
-                        <p class="head-block-right">Berlin, Germany</p>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="wrapper-text">
-                        <p class="block-left">Student assistant</p>
-                        <p class="block-right">Nov 2013 - Jan 2015</p>
-                      </div>
-                    </div>
-                    <div>
-                      <ul class="wrapper-list">
-                        <li>Using statistical methods to obtain significant climate response signals from 'climate engineering' simulations</li>
-                      </ul>
-                    </div>
-                    
-                    <div class="wrapper-box">
-                      <div class="wrapper">
-                        <p class="head-block-left">AWI - Alfred-Wegener-Institute</p>
-                        <p class="head-block-right">Bremerhaven, Germany</p>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="wrapper-text">
-                        <p class="block-left">Internship</p>
-                        <p class="block-right">Feb 2014 - Apr 2014</p>
-                      </div>
-                    </div>
-                    <div>
-                      <ul class="wrapper-list">
-                        <li>Obtaining reliability information from backward-trajectories of re-analysis experiments</li>
-                      </ul>
-                    </div>
-                    
-                    <div class="wrapper-box">
-                      <div class="wrapper">
-                        <p class="head-block-left">GFZ - German Research Center for Geosciences</p>
-                        <p class="head-block-right">Potsdam, Germany</p>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="wrapper-text">
-                        <p class="block-left">Student assistant</p>
-                        <p class="block-right">May 2012 - Nov 2013</p>
-                      </div>
-                    </div>
-                    <div>
-                      <ul class="wrapper-list">
-                        <li>Prepare and validate regional climate model outputs</li>
-                        <li>Computing future climate scenarios</li>
-                        <li>Archiving and homogenizing historical datasets</li>
-                      </ul>
-                    </div>
-                    
-                    <div class="wrapper-box">
-                      <div class="wrapper">
-                        <p class="head-block-left">ETH - Swiss Federal Institute of Technology</p>
-                        <p class="head-block-right">Zurich, Switzerland</p>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="wrapper-text">
-                        <p class="block-left">Internship</p>
-                        <p class="block-right">Jul 2012 - Sept 2012</p>
-                      </div>
-                    </div>
-                    <div>
-                      <ul class="wrapper-list">
-                        <li>Case studies of the durability of fronts over the southern Indian ocean by correlating potential vorticity and condensational heating</li>
-                      </ul>
-                    </div>
-                    
-                  </div>
-                </div>
-      
-              </div>
-            </div>
-          </div>
-          <!-- Employment end -->
-        </div>
-      </div>
-      
-      <div class="back-cont4-container">
-        <h1><i class="fas fa-inbox"></i> Project funding</h1>
-        <div class="back-cont4">
-          
-          <!-- Grants start -->
-          <div id="grants" class="grants">
-            <div class="container">
-              <p>NAVIGATE<br> 
-                Navigating the uncharted territory of the Anthropocene climate<br>
-                <strong>WP co-lead, task lead</strong> (2.3/10 million NOK)<br>
-                <span><emp>Norwegian Research Council</emp>, Norway, 2025-2028</span>
-              </p>
-              <p>Towards2020 Seed Funding Project<br> 
-                GRAFITE (Global pRojections And Feedback Interactions in Tipping point Emulators)<br>
-                <strong>Project lead</strong> (0.5 million NOK)<br>
-                <span><emp>CICERO Center for Internation Climate Research</emp>, Oslo, Norway, 2024</span>
-              </p>
-              <p>Fast Track Initiative Seed Funding Project<br> 
-                LICORICE (Effects of climate-driven Land-surface Integrity Changes in permafrOst Regions on northward expanding agrICulturE)<br>
-                <strong>Project lead</strong> (0.5 million NOK)<br>
-                <span><emp>Bjerknes Centre for Climate Research</emp>, Bergen, Norway, 2023</span>
-              </p>
-            </div>
-          <!-- Languages end -->
-          
-          </div>
-        </div>
-      </div> 
+    .timeline-entry:last-child { border-bottom: none; }
 
-      <div class="back-cont4-container">
-        <h1><i class="fa fa-award"></i> Awards and Grants</h1>
-        <div class="back-cont4">
-          
-          <!-- Grants start -->
-          <div id="grants" class="grants">
-            <div class="container">
-              <p>Best PYRN ECS Poster Presentation Award: Runner-up<br>
-                <span><emp>EUCOP6 European Conference on Permafrost</emp>, Puigcerd&agrave;, Spain, June 2023</span>
-              </p>
-              <p>PhD Thesis Award<br>
-                Spanish National Research Council - most relevant theses in 2021<br>
-                <span><emp>Spanish National Research Council (CSIC)</emp>, Madrid, Spain, February 2023</span>
-              </p>
-              <p>RCN Researcher Mobility Grant<br>
-                <span><emp>Research Council of Norway, NORCE Norwegian Research Centre</emp>, Bergen, Norway, December 2022</span>
-              </p>
-              <p>Utrecht Network Young Researchers Mobility Grant<br>
-                <span><emp>Utrecht Network </emp>Kingston upon Hull, UK, April 2021</span>
-              </p>
-              <p>Top 3 presentations at PhDay Physics Complutense 2019<br>
-                <span><emp>Complutense University Madrid</emp>, Madrid, Spain, November 2019</span>
-              </p>
-              <p>Ernst-Reuter-Gesellschaft Travel Grant<br>
-                <span><emp>Free University of Berlin</emp>, Berlin, Germany, August 2016</span>
-              </p>
-              
-            </div>
-          <!-- Languages end -->
-          
-          </div>
-        </div>
-      </div> 
-      
-      <div class="back-cont5-container">
-        <h1><i class="fa fa-comment-dots"></i> Languages</h1>
-        <div class="back-cont5">
-          
-          <!-- Languages start -->
-          <div id="languages" class="languages">
-            <div class="container">
-              <div class="languages-text">
-                <span>German</span><br>
-                <p><progress id="file" value="100" max="100"></progress></p>
-              </div>
-              <div class="languages-text">
-                <span>English</span><br>
-                <p><progress id="file" value="90" max="100"></progress></p>
-              </div>
-              <div class="languages-text">
-                <span>Spanish</span><br>
-                <p><progress id="file" value="80" max="100"></progress></p>
-              </div>
-              <div class="languages-text">
-                <span>Norwegian</span><br>
-                <p><progress id="file" value="40" max="100"></progress></p>
-              </div>
-            </div>
-          <!-- Languages end -->
-          
-          </div>
-        </div>
-      </div> 
-      
-      
+    .tl-meta { padding-top: 2px; }
+
+    .tl-period {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .tl-org {
+      font-size: 13px;
+      color: var(--text2);
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .tl-location {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .tl-role {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .tl-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .tl-bullets li {
+      font-size: 13px;
+      color: var(--text3);
+      line-height: 1.6;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .tl-bullets li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    /* ---- Awards ---- */
+    .award-row {
+      padding: 14px 0;
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .award-row:last-child { border-bottom: none; }
+
+    .award-name {
+      font-size: 13px;
+      color: var(--text2);
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    .award-detail {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .award-year {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* ---- Funding ---- */
+    .funding-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-bottom: 10px;
+    }
+
+    .funding-title {
+      font-size: 13px;
+      color: var(--text2);
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .funding-subtitle {
+      font-size: 12px;
+      color: var(--muted2);
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    .funding-meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .funding-badge {
+      font-size: 11px;
+      color: var(--accent);
+      background: rgba(75,158,255,0.07);
+      border: 0.5px solid rgba(75,158,255,0.2);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* ---- Interests ---- */
+    .interests-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .interest-tag {
+      font-size: 12px;
+      color: var(--text3);
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    /* ---- Languages ---- */
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .lang-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      text-align: center;
+    }
+
+    .lang-name {
+      font-size: 13px;
+      color: var(--text2);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .lang-dots {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .lang-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--border2);
+    }
+
+    .lang-dot.filled { background: var(--accent); }
+
+    @media (max-width: 700px) {
+      .page-hero { padding: 40px 20px 36px; }
+      .timeline-entry { grid-template-columns: 1fr; gap: 8px; }
+      .lang-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <span class="nav-logo">Norman J. Steinert</span>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="background.html" class="active">Background</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="dissemination.html">Dissemination</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <h1 class="page-title">Background</h1>
+    <p class="page-intro">
+      Physical climate scientist investigating <strong>climate change mitigation scenarios</strong>, Earth system reversibility, and the role of tipping points in shaping long-term climate responses. My work combines Earth system models with reduced-complexity climate emulators to advance the understanding of climate feedbacks and their potential irreversibility under temperature overshoot.
+    </p>
+    <a class="pill" href="https://normansteinert.github.io/CV_Steinert.pdf" target="_blank">
+      <i class="ti ti-download" aria-hidden="true"></i> Download CV
+    </a>
+  </div>
+
+  <div class="page" style="padding-top: 48px;">
+
+    <!-- Interests -->
+    <span class="label">Interests</span>
+    <div class="interests-cloud" style="margin-bottom: 0;">
+      <span class="interest-tag">Climate Change</span>
+      <span class="interest-tag">Carbon Cycle</span>
+      <span class="interest-tag">Terrestrial Ecosystems</span>
+      <span class="interest-tag">Permafrost</span>
+      <span class="interest-tag">Climate Feedbacks</span>
+      <span class="interest-tag">Tipping Points</span>
+      <span class="interest-tag">Earth System Modelling</span>
+      <span class="interest-tag">Climate Emulators</span>
     </div>
 
-    <footer class="footer">
-      &copy;2026 Norman J. Steinert
-    </footer>
+    <hr class="divider">
 
-  </body>
+    <!-- Employment -->
+    <span class="label">Employment</span>
+
+    <div class="timeline-entry">
+      <div class="tl-meta">
+        <p class="tl-period">Jan 2024 – present</p>
+        <p class="tl-org">CICERO</p>
+        <p class="tl-location">Oslo, Norway</p>
+      </div>
+      <div>
+        <p class="tl-role">Senior Researcher</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="tl-meta">
+        <p class="tl-period">Jan 2022 – Dec 2023</p>
+        <p class="tl-org">NORCE</p>
+        <p class="tl-location">Bergen, Norway</p>
+      </div>
+      <div>
+        <p class="tl-role">Postdoctoral Researcher</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="tl-meta">
+        <p class="tl-period">May – Sept 2017</p>
+        <p class="tl-org">CIEMAT</p>
+        <p class="tl-location">Madrid, Spain</p>
+      </div>
+      <div>
+        <p class="tl-role">Research Assistant</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="tl-meta">
+        <p class="tl-period">Oct 2016 – Apr 2017</p>
+        <p class="tl-org">Reuniwatt</p>
+        <p class="tl-location">La Réunion, France</p>
+      </div>
+      <div>
+        <p class="tl-role">Internship</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="tl-meta">
+        <p class="tl-period">Mar 2015 – Sept 2016</p>
+        <p class="tl-org">Max Planck Institute for Meteorology</p>
+        <p class="tl-location">Hamburg, Germany</p>
+      </div>
+      <div>
+        <p class="tl-role">Student Assistant</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="tl-meta">
+        <p class="tl-period">Nov 2013 – Jan 2015</p>
+        <p class="tl-org">Free University of Berlin</p>
+        <p class="tl-location">Berlin, Germany</p>
+      </div>
+      <div>
+        <p class="tl-role">Student Assistant</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="tl-meta">
+        <p class="tl-period">Feb – Apr 2014</p>
+        <p class="tl-org">Alfred-Wegener-Institute</p>
+        <p class="tl-location">Bremerhaven, Germany</p>
+      </div>
+      <div>
+        <p class="tl-role">Internship</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="tl-meta">
+        <p class="tl-period">May 2012 – Nov 2013</p>
+        <p class="tl-org">German Research Centre for Geosciences</p>
+        <p class="tl-location">Potsdam, Germany</p>
+      </div>
+      <div>
+        <p class="tl-role">Student Assistant</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="tl-meta">
+        <p class="tl-period">Jul – Sept 2012</p>
+        <p class="tl-org">ETH Zürich</p>
+        <p class="tl-location">Zürich, Switzerland</p>
+      </div>
+      <div>
+        <p class="tl-role">Internship</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Education -->
+    <span class="label">Education</span>
+
+    <div class="timeline-entry">
+      <div class="tl-meta">
+        <p class="tl-period">Oct 2017 – Dec 2021</p>
+        <p class="tl-org">Complutense University</p>
+        <p class="tl-location">Madrid, Spain</p>
+      </div>
+      <div>
+        <p class="tl-role">PhD in Physics</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="tl-meta">
+        <p class="tl-period">Oct 2013 – Jul 2017</p>
+        <p class="tl-org">Free University of Berlin</p>
+        <p class="tl-location">Berlin, Germany</p>
+      </div>
+      <div>
+        <p class="tl-role">M.Sc. in Meteorology</p>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="tl-meta">
+        <p class="tl-period">Oct 2010 – Sept 2013</p>
+        <p class="tl-org">Free University of Berlin</p>
+        <p class="tl-location">Berlin, Germany</p>
+      </div>
+      <div>
+        <p class="tl-role">B.Sc. in Meteorology</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Project Funding -->
+    <span class="label">Project Funding</span>
+
+    <div class="funding-card">
+      <p class="funding-title">NAVIGATE — Navigating the uncharted territory of the Anthropocene climate</p>
+      <p class="funding-subtitle">Norwegian Research Council, 2025–2028</p>
+      <div class="funding-meta">
+        <span class="funding-badge">WP co-lead, task lead</span>
+        <span class="funding-badge">2.3 / 10 million NOK</span>
+      </div>
+    </div>
+
+    <div class="funding-card">
+      <p class="funding-title">GRAFITE — Global pRojections And Feedback Interactions in Tipping point Emulators</p>
+      <p class="funding-subtitle">Towards2020 Seed Funding · CICERO, 2024</p>
+      <div class="funding-meta">
+        <span class="funding-badge">Project lead</span>
+        <span class="funding-badge">0.5 million NOK</span>
+      </div>
+    </div>
+
+    <div class="funding-card">
+      <p class="funding-title">LICORICE — Land-surface Integrity Changes in permafrost Regions on northward expanding agrICulturE</p>
+      <p class="funding-subtitle">Fast Track Seed Funding · Bjerknes Centre, 2023</p>
+      <div class="funding-meta">
+        <span class="funding-badge">Project lead</span>
+        <span class="funding-badge">0.5 million NOK</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Awards -->
+    <span class="label">Awards &amp; Grants</span>
+
+    <div class="award-row">
+      <div>
+        <p class="award-name">Seal of Excellence’ for non-funded MSCA Postdoctoral Fellowship 2025 due to budget constraints</p>
+        <p class="award-detail">The European Commission</p>
+      </div>
+      <span class="award-year">2026</span>
+    </div>
+
+    <div class="award-row">
+      <div>
+        <p class="award-name">Best PYRN ECS Poster Presentation — Runner-up</p>
+        <p class="award-detail">EUCOP6 European Conference on Permafrost, Puigcerdà, Spain</p>
+      </div>
+      <span class="award-year">2023</span>
+    </div>
+
+    <div class="award-row">
+      <div>
+        <p class="award-name">PhD Thesis Award</p>
+        <p class="award-detail">Spanish National Research Council (CSIC) — most relevant theses in 2021</p>
+      </div>
+      <span class="award-year">2023</span>
+    </div>
+
+    <div class="award-row">
+      <div>
+        <p class="award-name">RCN Researcher Mobility Grant</p>
+        <p class="award-detail">Research Council of Norway, NORCE, Bergen</p>
+      </div>
+      <span class="award-year">2022</span>
+    </div>
+
+    <div class="award-row">
+      <div>
+        <p class="award-name">Utrecht Network Young Researchers Mobility Grant</p>
+        <p class="award-detail">Utrecht Network, Kingston upon Hull, UK</p>
+      </div>
+      <span class="award-year">2021</span>
+    </div>
+
+    <div class="award-row">
+      <div>
+        <p class="award-name">Top 3 Presentations — PhDay Physics Complutense</p>
+        <p class="award-detail">Complutense University Madrid</p>
+      </div>
+      <span class="award-year">2019</span>
+    </div>
+
+    <div class="award-row">
+      <div>
+        <p class="award-name">Ernst-Reuter-Gesellschaft Travel Grant</p>
+        <p class="award-detail">Free University of Berlin</p>
+      </div>
+      <span class="award-year">2016</span>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Languages -->
+    <span class="label">Languages</span>
+    <div class="lang-grid">
+      <div class="lang-card">
+        <p class="lang-name">German</p>
+        <div class="lang-dots">
+          <span class="lang-dot filled"></span><span class="lang-dot filled"></span>
+          <span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span>
+        </div>
+      </div>
+      <div class="lang-card">
+        <p class="lang-name">English</p>
+        <div class="lang-dots">
+          <span class="lang-dot filled"></span><span class="lang-dot filled"></span>
+          <span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span>
+        </div>
+      </div>
+      <div class="lang-card">
+        <p class="lang-name">Spanish</p>
+        <div class="lang-dots">
+          <span class="lang-dot filled"></span>
+          <span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot"></span><span class="lang-dot"></span>
+        </div>
+      </div>
+      <div class="lang-card">
+        <p class="lang-name">Norwegian</p>
+        <div class="lang-dots">
+          <span class="lang-dot filled"></span>
+          <span class="lang-dot filled"></span><span class="lang-dot"></span><span class="lang-dot"></span><span class="lang-dot"></span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page -->
+
+  <footer class="footer">
+    <span>© 2026 Norman J. Steinert</span>
+    <a href="https://cicero.oslo.no" target="_blank">
+      CICERO Centre for International Climate Research
+      <i class="ti ti-external-link" aria-hidden="true"></i>
+    </a>
+  </footer>
+
+</body>
 </html>

@@ -1,391 +1,738 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-682NPCQNMC"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      <title>Publications — Norman J. Steinert</title>
+      <link href="style.css" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
+      <style>
+            .page-hero {
+                  padding: 56px 48px 48px;
+                  border-bottom: 0.5px solid var(--border);
+              }
+      
+              .page-title {
+                  font-family: var(--serif);
+                  font-size: 38px;
+                  color: var(--text);
+                  margin-bottom: 12px;
+              }
+      
+              .page-intro {
+                  font-size: 14px;
+                  line-height: 1.85;
+                  color: var(--text3);
+                  max-width: 680px;
+                  margin-bottom: 20px;
+              }
+      
+              .ext-links {
+                  display: flex;
+                  gap: 8px;
+                  flex-wrap: wrap;
+              }
+      
+              /* ---- Year header ---- */
+              .year-block {
+                  margin-top: 44px;
+              }
+      
+              .year-heading {
+                  font-family: var(--serif);
+                  font-size: 28px;
+                  color: var(--text);
+                  margin-bottom: 16px;
+                  padding-bottom: 12px;
+                  border-bottom: 0.5px solid var(--border);
+              }
+      
+              .year-heading.review {
+                  font-size: 22px;
+                  color: var(--accent2);
+              }
+      
+              /* ---- Publication entry ---- */
+              .pub-entry {
+                  padding: 16px 0;
+                  border-bottom: 0.5px solid var(--border);
+                  display: grid;
+                  grid-template-columns: 52px 1fr auto;
+                  gap: 0 18px;
+                  align-items: start;
+              }
+      
+              /* entries without badges (in-review) collapse the left column */
+              .pub-entry.no-badge {
+                  grid-template-columns: 1fr auto;
+              }
+      
+              .pub-entry:last-child { border-bottom: none; }
+      
+              .pub-title {
+                  font-size: 14px;
+                  font-weight: 500;
+                  color: var(--text2);
+                  margin-bottom: 5px;
+                  line-height: 1.5;
+              }
+      
+              .pub-title a {
+                  color: var(--text2);
+                  text-decoration: none;
+              }
+      
+              .pub-title a:hover { color: var(--accent); }
+      
+              .pub-authors {
+                  font-size: 13px;
+                  color: var(--muted);
+                  line-height: 1.6;
+                  margin-bottom: 5px;
+              }
+      
+              .pub-journal {
+                  font-size: 13px;
+                  color: var(--muted2);
+                  font-style: italic;
+              }
+      
+              .pub-journal span {
+                  font-style: normal;
+                  color: var(--muted);
+              }
+      
+              .pub-doi {
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 4px;
+                  font-size: 11px;
+                  color: var(--accent);
+                  font-weight: 500;
+                  white-space: nowrap;
+                  padding: 4px 10px;
+                  border: 0.5px solid rgba(75,158,255,0.25);
+                  border-radius: 6px;
+                  transition: all 0.2s;
+                  align-self: flex-start;
+                  margin-top: 2px;
+              }
+      
+              .pub-doi:hover {
+                  background: rgba(75,158,255,0.08);
+                  color: var(--accent);
+              }
+      
+              .review-badge {
+                  font-size: 11px;
+                  color: #f59e42;
+                  background: rgba(245,158,66,0.08);
+                  border: 0.5px solid rgba(245,158,66,0.25);
+                  padding: 3px 9px;
+                  border-radius: 20px;
+                  font-weight: 500;
+                  white-space: nowrap;
+              }
+      
+              /* ---- Reports / Datasets ---- */
+              .report-entry {
+                  padding: 14px 0;
+                  border-bottom: 0.5px solid var(--border);
+                  font-size: 13px;
+                  color: var(--text3);
+                  line-height: 1.7;
+              }
+      
+              .report-entry:last-child { border-bottom: none; }
+      
+              .report-entry a {
+                  color: var(--accent);
+                  font-size: 12px;
+              }
+      
+              @media (max-width: 700px) {
+                  .page-hero { padding: 40px 20px 36px; }
+                  .pub-entry { grid-template-columns: 44px 1fr; }
+                  .pub-entry .pub-doi { grid-column: 2; }
+                  .pub-entry.no-badge { grid-template-columns: 1fr; }
+              }
+      
+              /* ---- Metric badges: vertical column left of entry ---- */
+              .pub-badges {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 6px;
+                  padding-top: 2px;
+              }
+      
+              /* Altmetric donut — invert so number is readable on dark bg */
+              .pub-badges .altmetric-embed {
+                  display: block;
+                  transform: scale(0.72);
+                  transform-origin: center top;
+                  filter: invert(1) hue-rotate(180deg);
+                  /* hue-rotate(180deg) after invert shifts the colours back toward
+                        their originals, so the ring stays recognisably coloured while
+                        the white background and dark number both invert to the right values */
+              }
+      
+              /* Dimensions badge */
+              .pub-badges .__dimensions_badge_embed__ {
+                  display: block;
+                  transform: scale(0.78);
+                  transform-origin: center top;
+              }
+          </style>
+    </head>
+    <body>
 
-      gtag('config', 'G-682NPCQNMC');
-    </script>
-    
-    <!--meta data-->
-    <title>Norman J. Steinert</title>
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    <script src="script.js"></script>
-    <script src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
-    <script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
-  </head>
-  <body>
+      <nav class="nav">
+        <span class="nav-logo">Norman J. Steinert</span>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="background.html">Background</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a class="active" href="publications.html">Publications</a></li>
+          <li><a href="dissemination.html">Dissemination</a></li>
+        </ul>
+      </nav>
 
-    <!--nav start -->
-    <nav class="navigation">
-      <div class="container">
-        <div class="nav-ini">
-          <h1><a href="index.html">Norman J. Steinert, PhD</a></h1>
-        </div>
-        <div class="nav-items">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="background.html">Background</a></li>
-            <li><a href="research.html">Research</a></li>
-            <li><u><a href="publications.html">Publications</a></u></li>
-            <li><a href="outreach.html">Dissemination</a></li>
-          </ul>
+      <div class="page-hero">
+        <h1 class="page-title">Publications</h1>
+        <p class="page-intro">Peer-reviewed articles, reports, and datasets.</p>
+        <div class="ext-links">
+                <a class="pill" href="https://scholar.google.com/citations?hl=en&user=F1At598AAAAJ" target="_blank">
+                        <i aria-hidden="true" class="ti ti-book"></i>Google Scholar
+                </a>
+                <a class="pill" href="https://orcid.org/0000-0002-2154-5857" target="_blank">
+                        <i aria-hidden="true" class="ti ti-id"></i>ORCID
+                </a>
+                <a class="pill" href="https://www.researchgate.net/profile/Norman_Steinert" target="_blank">
+                        <i aria-hidden="true" class="ti ti-flask"></i>ResearchGate
+                </a>
         </div>
       </div>
-    </nav>
-    <!-- nav end -->
-    
-    <div class="publications">
-      <h1>Publications</h1>
-      <div class="publications-cont">
+      
+      <div class="page" style="padding-top: 0;">
 
-        <h2>In review</h2>
+        <!-- In Review -->
+        <div class="year-block">
+          <h2 class="year-heading review">In Review</h2>
 
-        <p>Sanderson, B. M., M. Sandstad, M. Dewey, <u>N. J. Steinert</u>, J. Fjelds&aring;: <strong>METEORv1.6: Spatial climate variability and integrated impact emulation</strong>.<br> 
-          <em style="color: darkblue;">In review</em>
-          <a href="https://doi.org/10.5194/egusphere-2026-2029" title="Article"><i class="fa fa-file-alt"></i></a>
-        </p>
-
-        <p><u>Steinert, N. J.</u>, K. Zickfeld, B. M. Sanderson, C. D. Koven, N. Mengis, P. Rethmeier, J. Schwinger: <strong>Key features of the climate response to overshoot</strong>.<br> 
-          <em style="color: darkblue;">In review</em>
-        </p>
-
-        <p>Sanderson, B. M., M. Sandstad, A. Romero-Prieto, S. Jenkins, C. Koven, G. Peters, R. Séfèrian, A. H. MacDougall, A. Seshadri, V. Brovkin, J. Dunne, A. L. S. Swann, T. Koenigk, R. A. Fisher, D. Hohn, T. Ilyina, C. D. Jones, H. Li, P. Lawrence, S. Liddicoat, N. Mengis, A. Romanou, L. T. Sentman, C. Smith, <u>N. J. Steinert</u>, J. Tjiputra, T. Ziehn: <strong>Decomposition of the Zero Emissions Commitment into thermal warming pipeline and carbon buffering components</strong>.<br> 
-          <em style="color: darkblue;">In review</em>
-          <a href="https://doi.org/10.5194/egusphere-2026-1875" title="Article"><i class="fa fa-file-alt"></i></a>
-        </p>
-
-        <p>Marvel, K., C. Jones, V. Cooper, <u>N. J. Steinert</u>: <strong>How to use CMIP data in climate assessments</strong>.<br> 
-          <em style="color: darkblue;">In review</em>
-        </p>
-
-        <p>Swann, A. L. S., C. D. Koven, C. Proistosecu, R. A. Fisher, B. M. Sanderson, V. Brovkin, T. Hajima, C. D. Jones, N. Y. Kiang, D. M. Lawrence, S. Liddicoat, H. Liddy, A. Romanou, R. S&eacute;f&eacute;rian, L. T. Sentman, <u>N. J. Steinert</u>, J. Tjiputra, T. Ziehn: <strong>Land carbon response to positive, zero, and negative CO2 emissions across Earth system models</strong>.<br> 
-          <em style="color: darkblue;">In review</em>
-          <a href="https://doi.org/10.5194/egusphere-2026-1673" title="Article"><i class="fa fa-file-alt"></i></a>
-        </p>
-
-        <p>M&uuml;hlhaus, R., <u>N. J. Steinert</u>, J. Rockstr&ouml;m, N. Wunderling: <strong>Observationally constrained climate sensitivity implies high climate tipping risk</strong>.<br> 
-          <em style="color: darkblue;">In review</em>
-          <a href="https://doi.org/10.21203/rs.3.rs-9105405/v1" title="Article"><i class="fa fa-file-alt"></i></a>
-        </p>
-
-        <p><u>Steinert, N. J.</u>, G. Munday, M. Sandstad, B. M. Sanderson, N. Wunderling: <strong>Permafrost carbon-climate feedback amplifies Earth system tipping risks</strong>.<br> 
-          <em style="color: darkblue;">In review</em>
-        </p>
-
-        <p>Sanderson, B. M., S. Baur, C.-F. Schleussner, G. Peters, S. Mittal, M. Sandstad, S. Kalbekken, C. Smith, S. Fuss, B. van Ruijven, R. Fisher, J. Rogelj, R. S&eacute;f&eacute;rian, B. Samset, <u>N. J. Steinert</u>, L. Terray, J. Fuglestvedt: <strong>Robust assessment of Solar Radiation Modification risks and uncertainties must include shocks and societal feedbacks</strong>.<br>
-          <em style="color: darkblue;">In review</em>
-          <a href="https://egusphere.copernicus.org/preprints/2026/egusphere-2026-28/" title="Article"><i class="fa fa-file-alt"></i></a>
-        </p>
-
-        <p>Varney, R. M., D. Hooke, <u>N. J. Steinert</u>, T. L. Smallman, C. Mathison, and E. J. Burke: <strong>Northern high latitudes could become a net carbon source below 2&deg;C global warming</strong>.<br> 
-          <em style="color: darkblue;">In review</em>
-          <a href="https://egusphere.copernicus.org/preprints/2026/egusphere-2025-6075/" title="Article"><i class="fa fa-file-alt"></i></a>
-        </p>
-
-        <p>Romero-Prieto, A., M. Sandstad, B. M. Sanderson, Z. R. J. Nicholls, <u>N. J. Steinert</u>, T. Gasser, C. Mathison, J. Kikstra, T. J. Aubry, and C. Smith: <strong>Reduced Complexity Model Intercomparison Project Phase 3: Experimental protocol for coordinated constraining and evaluation of Reduced-Complexity Models</strong>.<br> 
-          <em style="color: darkblue;">In review</em>
-          <a href="https://egusphere.copernicus.org/preprints/2025/egusphere-2025-5775/" title="Article"><i class="fa fa-file-alt"></i></a>
-        </p>
-
-        <p><u>Steinert, N. J.</u>, J. Schwinger, E. Burke, B. Zhu, T. Gasser, G. Munday, C. Mathison, S.-W. Park, H. Lee: <strong>AMOC tipping slows permafrost carbon release during overshoot</strong>.<br> 
-          <em style="color: darkblue;">In review</em>
-          <a href="https://doi.org/10.21203/rs.3.rs-7031516/v1" title="Article"><i class="fa fa-file-alt"></i></a>
-        </p>
-
-        <p>Kug, J.-S., Y. Shin, J.-H. Oh, C. Liu, S.-W. Yeh, J. Schwinger, K. Zickfeld, S.-I. An, S.-W. Son, S.-K. Min, H. Lee, <u>N. Steinert</u> : <strong>Climate Change Hysteresis and Irreversibility</strong>.<br> 
-          <em style="color: darkblue;">In review</em>
-        </p>
-
-        <p>Winkelmann, R., ..., <u>N. J. Steinert</u>, ..., et al.: <strong>The Tipping Points Modelling Intercomparison Project (TIPMIP): Assessing tipping point risks in the Earth system</strong>.<br> 
-          <em style="color: darkblue;">In review</em>
-          <a href="https://doi.org/10.5194/egusphere-2025-1899" title="Article"><i class="fa fa-file-alt"></i></a>
-        </p>
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">METEORv1.6: Spatial climate variability and integrated impact emulation</p>
+              <p class="pub-authors">Sanderson, B. M., M. Sandstad, M. Dewey, <strong>N. J. Steinert</strong>, J. Fjeldså</p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/egusphere-2026-2029" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> preprint</a>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">Key features of the climate response to overshoot</p>
+              <p class="pub-authors"><strong>Steinert, N. J.</strong>, K. Zickfeld, B. M. Sanderson, C. D. Koven, N. Mengis, P. Rethmeier, J. Schwinger</p>
+            </div>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">Decomposition of the Zero Emissions Commitment into thermal warming pipeline and carbon buffering components</p>
+              <p class="pub-authors">Sanderson, B. M., M. Sandstad, A. Romero-Prieto, S. Jenkins, C. Koven, G. Peters, R. Séfèrian, A. H. MacDougall, A. Seshadri, V. Brovkin, J. Dunne, A. L. S. Swann, T. Koenigk, R. A. Fisher, D. Hohn, T. Ilyina, C. D. Jones, H. Li, P. Lawrence, S. Liddicoat, N. Mengis, A. Romanou, L. T. Sentman, C. Smith, <strong>N. J. Steinert</strong>, J. Tjiputra, T. Ziehn</p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/egusphere-2026-1875" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> preprint</a>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">How to use CMIP data in climate assessments</p>
+              <p class="pub-authors">Marvel, K., C. Jones, V. Cooper, <strong>N. J. Steinert</strong></p>
+            </div>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">Land carbon response to positive, zero, and negative CO₂ emissions across Earth system models</p>
+              <p class="pub-authors">Swann, A. L. S., C. D. Koven, C. Proistosecu, R. A. Fisher, B. M. Sanderson, V. Brovkin, T. Hajima, C. D. Jones, N. Y. Kiang, D. M. Lawrence, S. Liddicoat, H. Liddy, A. Romanou, R. Séférian, L. T. Sentman, <strong>N. J. Steinert</strong>, J. Tjiputra, T. Ziehn</p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/egusphere-2026-1673" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> preprint</a>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">Observationally constrained climate sensitivity implies high climate tipping risk</p>
+              <p class="pub-authors">Mühlhaus, R., <strong>N. J. Steinert</strong>, J. Rockström, N. Wunderling</p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.21203/rs.3.rs-9105405/v1" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> preprint</a>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">Permafrost carbon-climate feedback amplifies Earth system tipping risks</p>
+              <p class="pub-authors"><strong>Steinert, N. J.</strong>, G. Munday, M. Sandstad, B. M. Sanderson, N. Wunderling</p>
+            </div>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">Robust assessment of Solar Radiation Modification risks and uncertainties must include shocks and societal feedbacks</p>
+              <p class="pub-authors">Sanderson, B. M., S. Baur, C.-F. Schleussner, G. Peters, S. Mittal, M. Sandstad, S. Kalbekken, C. Smith, S. Fuss, B. van Ruijven, R. Fisher, J. Rogelj, R. Séférian, B. Samset, <strong>N. J. Steinert</strong>, L. Terray, J. Fuglestvedt</p>
+            </div>
+            <a class="pub-doi" href="https://egusphere.copernicus.org/preprints/2026/egusphere-2026-28/" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> preprint</a>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">Northern high latitudes could become a net carbon source below 2°C global warming</p>
+              <p class="pub-authors">Varney, R. M., D. Hooke, <strong>N. J. Steinert</strong>, T. L. Smallman, C. Mathison, E. J. Burke</p>
+            </div>
+            <a class="pub-doi" href="https://egusphere.copernicus.org/preprints/2026/egusphere-2025-6075/" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> preprint</a>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">RCMIP Phase 3: Experimental protocol for coordinated constraining and evaluation of Reduced-Complexity Models</p>
+              <p class="pub-authors">Romero-Prieto, A., M. Sandstad, B. M. Sanderson, Z. R. J. Nicholls, <strong>N. J. Steinert</strong>, T. Gasser, C. Mathison, J. Kikstra, T. J. Aubry, C. Smith</p>
+            </div>
+            <a class="pub-doi" href="https://egusphere.copernicus.org/preprints/2025/egusphere-2025-5775/" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> preprint</a>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">AMOC tipping slows permafrost carbon release during overshoot</p>
+              <p class="pub-authors"><strong>Steinert, N. J.</strong>, J. Schwinger, E. Burke, B. Zhu, T. Gasser, G. Munday, C. Mathison, S.-W. Park, H. Lee</p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.21203/rs.3.rs-7031516/v1" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> preprint</a>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">Climate Change Hysteresis and Irreversibility</p>
+              <p class="pub-authors">Kug, J.-S., Y. Shin, J.-H. Oh, C. Liu, S.-W. Yeh, J. Schwinger, K. Zickfeld, S.-I. An, S.-W. Son, S.-K. Min, H. Lee, <strong>N. J. Steinert</strong></p>
+            </div>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title">The Tipping Points Modelling Intercomparison Project (TIPMIP): Assessing tipping point risks in the Earth system</p>
+              <p class="pub-authors">Winkelmann, R., D. P. Dennis, J. F. Donges, S. Loriani, A. K. Klose, J. F. Abrams, J. Alvarez-Solas, T. Albrecht, D. Armstrong McKay, S. Bathiany, J. Blasco Navarro, V. Brovkin, E. Burke, G. Danabasoglu, R. V. Donner, M. Drüke, G. Georgievski, H. Goelzer, A. B. Harper, G. Hegerl, M. Hirota, A. Hu, L. C. Jackson, C. Jones, H. Kim, T. Koenigk, P. Lawrence, T. M. Lenton, H. Liddy, J. Licón-Saláiz, M. Menthon, M. Montoya, J. Nitzbon, S. Nowicki, B. Otto-Bliesner, F. Pausata, S. Rahmstorf, K. Ramin, A. Robinson, J. Rockström, A. Romanou, B. Sakschewski, C. Schädel, S. Sherwood, R. S. Smith, <strong>N. J. Steinert</strong>, D. Swingedouw, M. Willeit, W. Weijer, R. Wood, K. Wyser, S. Yang</p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/egusphere-2025-1899" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> preprint</a>
+          </div>
+        </div>
 
         <!-- 2026 -->
-        <h2><strong>2026</strong></h2>
+        <div class="year-block">
+          <h2 class="year-heading">2026</h2>
 
-        <p><a href="https://doi.org/10.1088/1748-9326/ae3cad" title="Article"><strong>The implications of overshooting 1.5&deg;C on Earth system tipping elements - a review</strong></a><br>
-          Ritchie<sup>*</sup>, P. D. L., <u>N. J. Steinert</u><sup>*</sup>, J. F. Abrams, H. Alkhayuon, C. W. Arnscheidt, N. Bochow, R. R. Chapman, J. Clarke, D. P. Dennis, J. F. Donges, B. M. Flores, J. Garbe, A. H&ouml;gner, C. Huntingford, T. M. Lenton, J. Lohmann, K. Lux-Gottschalk, M. Milkoreit, T. M&ouml;ller, P. Pearce-Kelly, L. Pereira, C. Quinn, C.-F. Schleussner, S. M. Stuenzi, D. Swingedouw, L. N. Van der Laan, K. Zickfeld, N. Wunderling<sup>*</sup><br> 
-          <em style="color: darkblue;">Environmental Research Letters</em>, 21, 043001 (2026). <a href="https://doi.org/10.1088/1748-9326/ae3cad" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <sup>*</sup>These authors share the first authorship.
-          <div class="altmetric-embed" data-doi="10.1088/1748-9326/ae3cad" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1088/1748-9326/ae3cad" data-style="small_rectangle"></div>
-        </p>
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1088/1748-9326/ae3cad"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1088/1748-9326/ae3cad" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.1088/1748-9326/ae3cad" target="_blank">The implications of overshooting 1.5°C on Earth system tipping elements — a review</a></p>
+              <p class="pub-authors">Ritchie*, P. D. L., <strong>N. J. Steinert*</strong>, J. F. Abrams, H. Alkhayuon, C. W. Arnscheidt, N. Bochow, R. R. Chapman, J. Clarke, D. P. Dennis, J. F. Donges, B. M. Flores, J. Garbe, A. Högner, C. Huntingford, T. M. Lenton, J. Lohmann, K. Lux-Gottschalk, M. Milkoreit, T. Möller, P. Pearce-Kelly, L. Pereira, C. Quinn, C.-F. Schleussner, S. M. Stuenzi, D. Swingedouw, L. N. Van der Laan, K. Zickfeld, N. Wunderling*<span style="font-style:italic; color: var(--muted); font-size:12px;">(*shared first authorship)</span></p>
+              <p class="pub-journal">Environmental Research Letters, <span>21, 043001</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.1088/1748-9326/ae3cad" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+
+        </div>
 
         <!-- 2025 -->
-        <h2><strong>2025</strong></h2>
+        <div class="year-block">
+          <h2 class="year-heading">2025</h2>
 
-        <p><a href="https://doi.org/10.5194/tc-19-5959-2025" title="Article"><strong>Permafrost sensitivity to soil hydro-thermodynamics in historical and scenario simulations with the MPI-ESM</strong></a><br>
-          Garc&iacute;a-Pereira, F., J. F. Gonz&aacute;lez-Rouco, N. Meabe-Yanguas, P. de Vrese, <u>N. J. Steinert</u>, J. Jungclaus, S. Lorenz<br>
-          <em style="color: darkblue;">The Cryosphere</em>, 19 (11), 5959-5981 (2025). <a href="https://doi.org/10.5194/tc-19-5959-2025" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.5194/tc-19-5959-2025" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.5194/tc-19-5959-2025" data-style="small_rectangle"></div>
-        </p>
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.5194/tc-19-5959-2025"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.5194/tc-19-5959-2025" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.5194/tc-19-5959-2025" target="_blank">Permafrost sensitivity to soil hydro-thermodynamics in historical and scenario simulations with the MPI-ESM</a></p>
+              <p class="pub-authors">García-Pereira, F., J. F. González-Rouco, N. Meabe-Yanguas, P. de Vrese, <strong>N. J. Steinert</strong>, J. Jungclaus, S. Lorenz</p>
+              <p class="pub-journal">The Cryosphere, <span>19(11), 5959–5981</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/tc-19-5959-2025" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.5194/gmd-18-8269-2025"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.5194/gmd-18-8269-2025" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.5194/gmd-18-8269-2025" target="_blank">METEORv1.0.1: a novel framework for emulating multi-timescale regional climate responses</a></p>
+              <p class="pub-authors">Sandstad, M., <strong>N. J. Steinert</strong>, S. Baur, B. M. Sanderson</p>
+              <p class="pub-journal">Geoscientific Model Development, <span>18(21), 8269–8312</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/gmd-18-8269-2025" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.5194/esd-16-1711-2025"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.5194/esd-16-1711-2025" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.5194/esd-16-1711-2025" target="_blank">Normalizing the permafrost carbon feedback contribution to TCRE and the Zero Emissions Commitment</a></p>
+              <p class="pub-authors"><strong>Steinert, N. J.</strong>& B. M. Sanderson</p>
+              <p class="pub-journal">Earth System Dynamics, <span>16(5), 1711–1721</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/esd-16-1711-2025" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.5194/gmd-18-5699-2025"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.5194/gmd-18-5699-2025" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.5194/gmd-18-5699-2025" target="_blank">flat10MIP: An emissions-driven experiment to diagnose the climate response to positive, zero, and negative CO₂ emissions</a></p>
+              <p class="pub-authors">Sanderson, B. M., V. Brovkin, R. A. Fisher, D. Hohn, T. Ilyina, C. D. Jones, T. Koenigk, C. Koven, H. Li, D. M. Lawrence, P. Lawrence, S. Liddicoat, A. H. MacDougall, N. Mengis, Z. Nicholls, E. O'Rourke, A. Romanou, M. Sandstad, J. Schwinger, R. Séférian, L. T. Sentman, I. R. Simpson, C. Smith, <strong>N. J. Steinert</strong>, A. L. S. Swann, J. Tjiputra, T. Ziehn</p>
+              <p class="pub-journal">Geoscientific Model Development, <span>18(17), 5699–5724</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/gmd-18-5699-2025" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1029/2024EF005787"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1029/2024EF005787" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.1029/2024EF005787" target="_blank">Irreversible Land Water Availability Changes From a Potential ITCZ Shift During Temperature Overshoot</a></p>
+              <p class="pub-authors"><strong>Steinert, N. J.</strong>, J. Schwinger, R. Chadwick, J.-S. Kug, H. Lee</p>
+              <p class="pub-journal">Earth's Future, <span>13(5), e2024EF005787</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.1029/2024EF005787" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1038/s41558-025-02327-9"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1038/s41558-025-02327-9" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.1038/s41558-025-02327-9" target="_blank">Risks of unavoidable impacts on forests at 1.5°C with and without overshoot</a></p>
+              <p class="pub-authors">Munday, G., C. D. Jones, <strong>N. J. Steinert</strong>, C. Mathison, E. Burke, C. Smith, C. Huntingford, R. Varney</p>
+              <p class="pub-journal">Nature Climate Change, <span>2025</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.1038/s41558-025-02327-9" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1088/1748-9326/adccdb"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1088/1748-9326/adccdb" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://iopscience.iop.org/article/10.1088/1748-9326/adccdb" target="_blank">Plant and soil characteristics as key predictors for future agricultural drought</a></p>
+              <p class="pub-authors">Samantaray*, A. K., <strong>N. J. Steinert*</strong>, P. Mooney <span style="font-style:italic; color: var(--muted); font-size:12px;">(*shared first authorship)</span></p>
+              <p class="pub-journal">Environmental Research Letters, <span>20, 054059</span></p>
+            </div>
+            <a class="pub-doi" href="https://iopscience.iop.org/article/10.1088/1748-9326/adccdb" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.5194/gmd-18-1785-2025"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.5194/gmd-18-1785-2025" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.5194/gmd-18-1785-2025" target="_blank">PRIME: Probabilistic Regional Impacts from Model patterns and Emissions</a></p>
+              <p class="pub-authors">Mathison, C. T., E. Burke, E. Kovacs, G. Munday, C. Jones, C. Smith, C. Huntingford, A. Wiltshire, <strong>N. J. Steinert</strong>, L. Gohar, R. Varney</p>
+              <p class="pub-journal">Geoscientific Model Development, <span>18, 1785–1808</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/gmd-18-1785-2025" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1126/sciadv.adn8819"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1126/sciadv.adn8819" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://www.science.org/doi/10.1126/sciadv.adn8819" target="_blank">Continued permafrost ecosystem carbon loss under net-zero and negative emissions</a></p>
+              <p class="pub-authors">Park, S-W., J.-H. Mun, J.-S. Kug, H. Lee, <strong>N. J. Steinert</strong>, S.-I. An, S. Jongsoo</p>
+              <p class="pub-journal">Science Advances, <span>11, eadn8819</span></p>
+            </div>
+            <a class="pub-doi" href="https://www.science.org/doi/10.1126/sciadv.adn8819" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
 
-        <p><a href="https://doi.org/10.5194/gmd-18-8269-2025" title="Article"><strong>METEORv1.0.1: a novel framework for emulating multi-timescale regional climate responses</strong></a><br>
-          Sandstad, M., <u>N. J. Steinert</u>, S. Baur, B. M. Sanderson<br>
-          <em style="color: darkblue;">Geoscientific Model Development</em>, 18 (21), 8269-8312 (2025). <a href="https://doi.org/10.5194/gmd-18-8269-2025" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.5194/gmd-18-8269-2025" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.5194/gmd-18-8269-2025" data-style="small_rectangle"></div>
-        </p>
+        </div>
 
-        <p><a href="https://doi.org/10.5194/esd-16-1711-2025" title="Article"><strong>Normalizing the permafrost carbon feedback contribution to the Transient Climate Response to Cumulative Carbon Emissions and the Zero Emissions Commitment</strong></a><br>
-          <u>Steinert, N. J.</u> & B. M. Sanderson<br>
-          <em style="color: darkblue;">Earth System Dynamics</em>, 16 (5), 1711-1721 (2025). <a href="https://doi.org/10.5194/esd-16-1711-2025" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.5194/esd-16-1711-2025" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.5194/esd-16-1711-2025" data-style="small_rectangle"></div>
-        </p>
-
-        <p><a href="https://doi.org/10.5194/gmd-18-5699-2025" title="Article"><strong>flat10MIP: An emissions-driven experiment to diagnose the climate response to positive, zero, and negative CO2 emissions</strong></a><br>
-          Sanderson, B. M., V. Brovkin, R. A. Fisher, D. Hohn, T. Ilyina, C. D. Jones, T. Koenigk, C. Koven, H. Li, D. M. Lawrence, P. Lawrence, S. Liddicoat, A. H. MacDougall, N. Mengis, Z. Nicholls, E. O'Rourke, A. Romanou, M. Sandstad, J. Schwinger, R. S&eacute;f&eacute;rian, L. T. Sentman, I. R. Simpson, C. Smith, <u>N. J. Steinert</u>, A. L. S. Swann, J. Tjiputra, T. Ziehn<br>
-          <em style="color: darkblue;">Geoscientific Model Development</em>, 18 (17), 5699-5724 (2025). <a href="https://doi.org/10.5194/gmd-18-5699-2025" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.5194/gmd-18-5699-2025" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.5194/gmd-18-5699-2025" data-style="small_rectangle"></div>
-        </p>
-
-        <p><a href="https://doi.org/10.1029/2024EF005787" title="Article"><strong>Irreversible Land Water Availability Changes From a Potential ITCZ Shift During Temperature Overshoot</strong></a><br>
-          <u>Steinert, N. J.</u>, J. Schwinger, R. Chadwick, J.-S. Kug, H. Lee<br>
-          <em style="color: darkblue;">Earth's Future</em>, 13 (5), e2024EF005787 (2025). <a href="https://doi.org/10.1029/2024EF005787" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.1029/2024EF005787" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1029/2024EF005787" data-style="small_rectangle"></div>
-        </p>
-
-        <p><a href="https://doi.org/10.1038/s41558-025-02327-9" title="Article"><strong>Risks of unavoidable impacts on forests at 1.5&deg;C with and without overshoot</strong></a><br> 
-          Munday, G., C. D. Jones, <u>N. J. Steinert</u>, C. Mathison, E. Burke, C. Smith, C. Huntingford, R. Varney<br>
-          <em style="color: darkblue;">Nature Climate Change</em>, (2025). <a href="https://doi.org/10.1038/s41558-025-02327-9" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.1038/s41558-025-02327-9" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1038/s41558-025-02327-9" data-style="small_rectangle"></div>
-        </p>
-
-        <p><a href="https://iopscience.iop.org/article/10.1088/1748-9326/adccdb" title="Article"><strong>Plant and soil characteristics as key predictors for future agricultural drought</strong></a><br> 
-          Samantaray<sup>*</sup>, A., K., <u>N. J. Steinert</u><sup>*</sup>, P. Mooney:<br>
-          <em style="color: darkblue;">Environmental Research Letters</em>, 20, 054059 (2025). <a href="https://iopscience.iop.org/article/10.1088/1748-9326/adccdb" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <sup>*</sup>These authors share the first authorship.
-          <div class="altmetric-embed" data-doi="10.1088/1748-9326/adccdb" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1088/1748-9326/adccdb" data-style="small_rectangle"></div>      
-        </p>
-
-        <p><a href="https://doi.org/10.5194/gmd-18-1785-2025" title="Article"><strong>A rapid application emissions-to-impacts tool for scenario assessment: Probabilistic Regional Impacts from Model patterns and Emissions (PRIME)</strong></a><br>
-          Mathison, C. T., E. Burke, E. Kovacs, G. Munday, C. Jones, C. Smith, C. Huntingford, A. Wiltshire, <u>N. J. Steinert</u>, L. Gohar, R. Varney.<br>
-          <em style="color: darkblue;">Geoscientific Model Development</em>, 18, 1785-1808 (2025). <a href="https://doi.org/10.5194/gmd-18-1785-2025" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.5194/gmd-18-1785-2025" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.5194/gmd-18-1785-2025" data-style="small_rectangle"></div> 
-        </p>
-
-        <p><a href="https://www.science.org/doi/10.1126/sciadv.adn8819" title="Article"><strong>Continued permafrost ecosystem carbon loss under net-zero and negative emissions</strong></a><br>
-          Park, S-W., Mun, J.-H., J.-S. Kug, H. Lee, <u>N. J. Steinert</u>, S.-I. An, S. Jongsoo<br>
-          <em style="color: darkblue;">Science Advances</em>, 11, eadn8819 (2025). <a href="https://www.science.org/doi/10.1126/sciadv.adn8819" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.1126/sciadv.adn8819" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1126/sciadv.adn8819" data-style="small_rectangle"></div> 
-        </p>
-        
         <!-- 2024 -->
-        <h2><strong>2024</strong></h2>
+        <div class="year-block">
+          <h2 class="year-heading">2024</h2>
 
-        <p><a href="https://doi.org/10.1038/s41586-024-08020-9" title="Article"><strong>Overconfidence in climate overshoot </strong></a><br>
-          Schleussner, C.-F., G. Ganti, Q. Lejeune, B. Zhu, P. Pfleiderer, R. Prütz, P. Ciais, T. L. Frölicher, S. Fuss, T. Gasser, M. J. Gidden, C. M. Kropf, F. Lacroix, R. Lamboll, R. Martyr, F. Maussion, J. W. McCaughey, M. Meinshausen, M. Mengel, Z. Nicholls, Y. Quilcaille, B. Sanderson, S. I. Seneviratne, J. Sillmann, C. J. Smith, <u>N. J. Steinert</u>, E. Theokritoff, R. Warren, J. Price, J. Rogelj <br> 
-          <em style="color: darkblue;">Nature</em>, 634, 366-373 (2024). <a href="https://doi.org/10.1038/s41586-024-08020-9" title="Article"><i class="fa fa-file-alt"></i></a> <br>
-          <div class="altmetric-embed" data-doi="10.1038/s41586-024-08020-9" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1038/s41586-024-08020-9" data-style="small_rectangle"></div>
-        </p>
-        
-        <p><a href="https://doi.org/10.1038/s41558-024-02011-4" title="Article"><strong>No respite from permafrost-thaw impacts in absence of a global tipping point</strong></a><br> 
-          Nitzbon, J., T. Schneider von Deimling, M. Aliyeva, S. E. Chadburn, G. Grosse, S. Laboor, H. Lee, G. Lohmann, <u>N. J. Steinert</u>, S. M. Stuenzi, M. Werner, S. Westermann, M. Langer<br>
-          <em style="color: darkblue;">Nature Climate Change</em>, 14, 573-585 (2024). <a href="https://doi.org/10.1038/s41558-024-02011-4" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.1038/s41558-024-02011-4" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1038/s41558-024-02011-4" data-style="small_rectangle"></div>
-        </p>
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1038/s41586-024-08020-9"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1038/s41586-024-08020-9" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.1038/s41586-024-08020-9" target="_blank">Overconfidence in climate overshoot</a></p>
+              <p class="pub-authors">Schleussner, C.-F., G. Ganti, Q. Lejeune, B. Zhu, P. Pfleiderer, R. Prütz, P. Ciais, T. L. Frölicher, S. Fuss, T. Gasser, M. J. Gidden, C. M. Kropf, F. Lacroix, R. Lamboll, R. Martyr, F. Maussion, J. W. McCaughey, M. Meinshausen, M. Mengel, Z. Nicholls, Y. Quilcaille, B. Sanderson, S. I. Seneviratne, J. Sillmann, C. J. Smith, <strong>N. J. Steinert</strong>, E. Theokritoff, R. Warren, J. Price, J. Rogelj</p>
+              <p class="pub-journal">Nature, <span>634, 366–373</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.1038/s41586-024-08020-9" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1038/s41558-024-02011-4"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1038/s41558-024-02011-4" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.1038/s41558-024-02011-4" target="_blank">No respite from permafrost-thaw impacts in absence of a global tipping point</a></p>
+              <p class="pub-authors">Nitzbon, J., T. Schneider von Deimling, M. Aliyeva, S. E. Chadburn, G. Grosse, S. Laboor, H. Lee, G. Lohmann, <strong>N. J. Steinert</strong>, S. M. Stuenzi, M. Werner, S. Westermann, M. Langer</p>
+              <p class="pub-journal">Nature Climate Change, <span>14, 573–585</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.1038/s41558-024-02011-4" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1029/2023GL107613"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1029/2023GL107613" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2023GL107613" target="_blank">Underestimated Land Heat Uptake Alters the Global Energy Distribution in CMIP6 Climate Models</a></p>
+              <p class="pub-authors"><strong>Steinert, N. J.</strong>, F. J. Cuesta-Valero, F. García-Pereira, P. de Vrese, C. Melo-Aguilar, E. García-Bustamante, J. H. Jungclaus, J. F. González-Rouco</p>
+              <p class="pub-journal">Geophysical Research Letters, <span>51(10), e2023GL107613</span></p>
+            </div>
+            <a class="pub-doi" href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2023GL107613" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1017/sus.2023.25"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1017/sus.2023.25" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.1017/sus.2023.25" target="_blank">Ten New Insights in Climate Science 2023</a></p>
+              <p class="pub-authors">Bustamante, M., J. Roy, D. Ospina, P. Achakulwisut, A. Aggarwal, A. Bastos, W. Broadgate, J. G. Canadell, E. R. Carr, D. Chen, H. A. Cleugh, K. L. Ebi, C. Edwards, C. Farbotko, M. Fernández-Martínez, T. L. Frölicher, S. Fuss, O. Geden, N. Gruber, L. J. Harrington, J. Hauck, Z. Hausfather, S. Hebden, A. Hebinck, S. Huq, M. Huss, M. L. P. Jamero, S. Juhola, N. Kumarasinghe, S. Lwasa, B. Mallick, M. Martin, S. McGreevy, P. Mirazo, A. Mukherji, G. Muttitt, G. F. Nemet, D. Obura, C. Okereke, T. Oliver, B. Orlove, N. S. Ouedraogo, P. K. Patra, M. Pelling, L. M. Pereira, Å. Persson, J. Pongratz, A. Prakash, A. Rammig, C. Raymond, A. Redman, C. Reveco, J. Rockström, R. Rodrigues, D. R. Rounce, E. L. F. Schipper, P. Schlosser, O. Selomane, G. Semieniuk, Y.-J. Shin, T. A. Siddiqui, V. Singh, G. B. Sioen, Y. Sokona, D. Stammer, <strong>N. J. Steinert</strong>, S. Suk, R. Sutton, L. Thalheimer, V. Thompson, G. Trencher, K. van der Geest, S. E. Werners, T. Wübbelmann, N. Wunderling, J. Yin, K. Zickfeld, J. Zscheischler</p>
+              <p class="pub-journal">Global Sustainability, <span>7, e19, 1–30</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.1017/sus.2023.25" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.5194/esd-15-547-2024"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.5194/esd-15-547-2024" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.5194/esd-15-547-2024" target="_blank">First comprehensive assessment of industrial era land heat uptake from multiple sources</a></p>
+              <p class="pub-authors">García-Pereira, F., J. F. González-Rouco, C. Melo-Aguilar, <strong>N. J. Steinert</strong>, E. García-Bustamante, P. de Vrese, J. Jungclaus, S. Lorenz, S. Hagemann, F. J. Cuesta-Valero, A. García-García, H. Beltrami</p>
+              <p class="pub-journal">Earth System Dynamics, <span>15, 547–564</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/esd-15-547-2024" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.5194/esd-15-41-2024"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.5194/esd-15-41-2024" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://esd.copernicus.org/articles/15/41/2024/esd-15-41-2024.html" target="_blank">Climate tipping point interactions and cascades: A review</a></p>
+              <p class="pub-authors">Wunderling*, N., A. S. von der Heydt*, Y. Aksenov, S. Barker, R. Bastiaansen, V. Brovkin, M. Brunetti, V. Couplet, T. Kleinen, C. H. Lear, J. Lohmann, R. M. Roman-Cuesta, S. Sinet, D. Swingedouw, R. Winkelmann, P. Anand, J. Barichivich, S. Bathiany, M. Baudena, J. T. Bruun, C. M. Chiessi, H. K. Coxall, D. Docquier, J. F. Donges, S. K. J. Falkena, A. K. Klose, D. Obura, J. Rocha, S. Rynders, <strong>N. J. Steinert</strong>, M. Willeit <span style="font-style:italic; color: var(--muted); font-size:12px;">(*shared first authorship)</span></p>
+              <p class="pub-journal">Earth System Dynamics, <span>15(1), 41–74</span></p>
+            </div>
+            <a class="pub-doi" href="https://esd.copernicus.org/articles/15/41/2024/esd-15-41-2024.html" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.5194/soil-10-1-2024"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.5194/soil-10-1-2024" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.5194/soil-10-1-2024" target="_blank">Thermodynamic and hydrological drivers of the subsurface thermal regime in Central Spain</a></p>
+              <p class="pub-authors">García-Pereira, F., J. F. González-Rouco, T. Schmid, C. Melo-Aguilar, C. Vegas-Cañas, <strong>N. J. Steinert</strong>, P. J. Roldán-Gómez, F. J. Cuesta-Valero, A. García-García, H. Beltrami, P. de Vrese</p>
+              <p class="pub-journal">SOIL, <span>10(1), 1–21</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/soil-10-1-2024" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
 
-        <p><a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2023GL107613" title="Article"><strong>Underestimated Land Heat Uptake Alters the Global Energy Distribution in CMIP6 Climate Models</strong></a><br> 
-          <u>Steinert, N. J.</u>, F. J. Cuesta-Valero, F. Garc&iacute;a-Pereira, P. de Vrese, C. Melo-Aguilar, E. Garc&iacute;a-Bustamante, J. H. Jungclaus, J. F. Gonz&aacute;lez-Rouco<br>
-          <em style="color: darkblue;">Geophysical Research Letters</em>, 51(10), e2023GL107613 (2024). <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2023GL107613" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.1029/2023GL107613" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1029/2023GL107613" data-style="small_rectangle"></div>
-        </p>
+        </div>
 
-        <p><a href="https://doi.org/10.1017/sus.2023.25" title="Article"><strong>Ten New Insights in Climate Science 2023</strong></a><br>
-          Bustamante, M., J. Roy, D. Ospina, P.Achakulwisut, A. Aggarwal, A. Bastos, W. Broadgate, J. G. Canadell, E. R. Carr, D. Chen, H. A. Cleugh, K. L. Ebi, C. Edwards, C. Farbotko, M. Fern&aacute;ndez-Mart&iacute;nez, T. L. Fr&ouml;licher, S. Fuss, O. Geden, N. Gruber, L. J. Harrington, J. Hauck, Z. Hausfather, S. Hebden, A. Hebinck, S. Huq, M. Huss, M. L. P. Jamero, S. Juhola, N. Kumarasinghe, S. Lwasa, B. Mallick, M. Martin, S. McGreevy, P. Mirazo, A. Mukherji, G. Muttitt, G. F. Nemet, D. Obura, C. Okereke, T. Oliver, B. Orlove, N. S. Ouedraogo, P. K. Patra, M. Pelling, L. M. Pereira, &Aring;. Persson, J. Pongratz, A. Prakash, A. Rammig, C. Raymond, A. Redman, C. Reveco, J. Rockstr&ouml;m, R. Rodrigues, D. R. Rounce, E. L. F. Schipper, P. Schlosser, O. Selomane, G. Semieniuk, Y.-J. Shin, T. A. Siddiqui, V. Singh, G. B. Sioen, Y. Sokona, D. Stammer, <u>N. J. Steinert</u>, S. Suk, R. Sutton, L. Thalheimer, V. Thompson, G. Trencher, K. van der Geest, S. E. Werners, T. W&uuml;bbelmann, N. Wunderling, J. Yin, K. Zickfeld, J. Zscheischler<br>
-          <em style="color: darkblue;">Global Sustainability</em>, 7, e19, 1-30 (2024). <a href="https://doi.org/10.1017/sus.2023.25" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.1017/sus.2023.25" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1017/sus.2023.25" data-style="small_rectangle"></div>
-        </p>
-
-        <p><a href="https://doi.org/10.5194/esd-15-547-2024" title="Article"><strong>First comprehensive assessment of industrial era land heat uptake from multiple sources</strong></a><br>
-          Garc&iacute;a-Pereira, F., J. F. Gonz&aacute;lez-Rouco, C. Melo-Aguilar, <u>N. J. Steinert</u>, E. Garc&iacute;a-Bustamante, P. de Vrese,  J. Jungclaus, S. Lorenz, S. Hagemann, F. J. Cuesta-Valero, A. Garc&iacute;a-Garc&iacute;a, H. Beltrami<br>
-          <em style="color: darkblue;">Earth System Dynamics</em>, 15, 547-564 (2024). <a href="https://doi.org/10.5194/esd-15-547-2024" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.5194/esd-15-547-2024" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.5194/esd-15-547-2024" data-style="small_rectangle"></div>
-        </p>
-
-        <p><a href="https://esd.copernicus.org/articles/15/41/2024/esd-15-41-2024.html" title="Article"><strong>Climate tipping point interactions and cascades: A review</strong></a><br>
-          Wunderling<sup>*</sup>, N., A. S., von der Heydt<sup>*</sup>, Y. Aksenov, S. Barker, R. Bastiaansen, V. Brovkin, M. Brunetti, V. Couplet, T. Kleinen, C. H. Lear, J. Lohmann, R. M. Roman-Cuesta, S. Sinet, D. Swingedouw, R. Winkelmann, P. Anand, J. Barichivich, S. Bathiany, M. Baudena, J. T. Bruun, C. M. Chiessi, H. K. Coxall, D. Docquier, J. F. Donges, S. K. J. Falkena, A. K. Klose, D. Obura, J. Rocha, S. Rynders, <u>N. J. Steinert</u>, M. Willeit<br>
-          <em style="color: darkblue;">Earth System Dynamics</em>, 15(1), 41-74 (2024). <a href="https://esd.copernicus.org/articles/15/41/2024/esd-15-41-2024.html" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <sup>*</sup>These authors share the first authorship.
-          <div class="altmetric-embed" data-doi="10.5194/esd-15-41-2024" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.5194/esd-15-41-2024" data-style="small_rectangle"></div>
-        </p>
-
-        <p><a href="https://doi.org/10.5194/soil-10-1-2024" title="Article"><strong>Thermodynamic and hydrological drivers of the subsurface thermal regime in Central Spain</strong></a><br>
-          Garc&iacute;a-Pereira, F., J. F. Gonz&aacute;lez-Rouco, T. Schmid, C. Melo-Aguilar, C. Vegas-Ca&#241;as, <u>N. J. Steinert</u>, P. J. Rold&aacute;n-G&oacute;mez, F. J. Cuesta-Valero, A. Garc&iacute;a-Garc&iacute;a, H. Beltrami, and P. de Vrese <br>
-          <em style="color: darkblue;">SOIL</em>, 10(1), 1-21 (2024). <a href="https://doi.org/10.5194/soil-10-1-2024" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.5194/soil-10-1-2024" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.5194/soil-10-1-2024" data-style="small_rectangle"></div>
-
-        </p>
-        
         <!-- 2023 -->
-        <h2><strong>2023</strong></h2>
+        <div class="year-block">
+          <h2 class="year-heading">2023</h2>
 
-        <p><a href="https://doi.org/10.1088/1748-9326/ad10d7" title="Article"><strong>Evaluating permafrost definitions for global permafrost area estimates in CMIP6 climate models</strong></a><br>
-          <u>Steinert, N. J.</u>, M. V. Debolskiy, E. J. Burke, F. Garc&iacute;a-Pereira, and H. Lee <br>
-          <em style="color: darkblue;">Environmental Research Letters</em>, 19(1), 014033 (2023). <a href="https://doi.org/10.1088/1748-9326/ad10d7" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.1088/1748-9326/ad10d7" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1088/1748-9326/ad10d7" data-style="small_rectangle"></div>
-        </p>
-        
-        <p><a href="https://doi.org/10.5194/tc-17-2095-2023" title="Article"><strong>Representation of soil hydrology in permafrost regions may explain large part of inter-model spread in simulated Arctic and subarctic climate</strong></a><br>
-          de Vrese, P., G. Georgievski, J. F. Gonzalez Rouco, D. Notz, T. Stacke, <u>N. J. Steinert</u>, S. Wilkenskjeld, and V. Brovkin <br>
-          <em style="color: darkblue;">The Cryosphere</em>, 17(5), 2095-2118 (2023). <a href="https://doi.org/10.5194/tc-17-2095-2023" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.5194/tc-17-2095-2023" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.5194/tc-17-2095-2023" data-style="small_rectangle"></div>
-        </p>
-        
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1088/1748-9326/ad10d7"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1088/1748-9326/ad10d7" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.1088/1748-9326/ad10d7" target="_blank">Evaluating permafrost definitions for global permafrost area estimates in CMIP6 climate models</a></p>
+              <p class="pub-authors"><strong>Steinert, N. J.</strong>, M. V. Debolskiy, E. J. Burke, F. García-Pereira, H. Lee</p>
+              <p class="pub-journal">Environmental Research Letters, <span>19(1), 014033</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.1088/1748-9326/ad10d7" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.5194/tc-17-2095-2023"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.5194/tc-17-2095-2023" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.5194/tc-17-2095-2023" target="_blank">Representation of soil hydrology in permafrost regions may explain large part of inter-model spread in simulated Arctic and subarctic climate</a></p>
+              <p class="pub-authors">de Vrese, P., G. Georgievski, J. F. Gonzalez Rouco, D. Notz, T. Stacke, <strong>N. J. Steinert</strong>, S. Wilkenskjeld, V. Brovkin</p>
+              <p class="pub-journal">The Cryosphere, <span>17(5), 2095–2118</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/tc-17-2095-2023" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+
+        </div>
+
         <!-- 2022 -->
-        <h2><strong>2022</strong></h2>
-        
-        <p><a href="https://doi.org/10.5194/esd-13-1641-2022" title="Article"><strong>Emit now, mitigate later? Earth system reversibility under overshoots of different magnitude and durations</strong></a><br>
-          Schwinger, J., A. Asaadi, <u>N. J. Steinert</u>, H. Lee <br>
-          <em style="color: darkblue;">Earth System Dynamics</em>, 13(4), 1641-1665 (2022). <a href="https://doi.org/10.5194/esd-13-1641-2022" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.5194/esd-13-1641-2022" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.5194/esd-13-1641-2022" data-style="small_rectangle"></div>
-        </p>
-        
-        <p><a href="https://www.cambridge.org/core/journals/global-sustainability/article/ten-new-insights-in-climate-science-2022/62C90D59C9F9890791B64762EAA06B8D" title="Article"><strong>Ten new insights in climate science 2022</strong></a><br>
-          Martin, M., E. A. Boakye, E. Boyd, W. Broadgate, M. Bustamante, J. G. Canadell, E. R. Carr, E. K. Chu, H. Cleugh, S. Csev&aacute;r, M. Daoudy, A. de Bremond, M. Dhimal, K. L. Ebi, C. Edwards, S. Fuss, M. P. Girardin, B. Glavovic, S. Hebden, M. Hirota, H.-H. Hsu, S. Huq, K. Ingold, O. M. Johannessen, Y. Kameyama, N. Kumarasinghe, G. S. Langendijk, T. Lissner, S. Lwasa, C. Machalaba, A. Maltais, M. V. Mathai, C. Mbow, K. E. McNamara, A. Mukherji, V. Murray, J. Mysiak, C. Okereke, D. Ospina, F. Otto, A. Prakash, J. M. Pulhin, E. Raju, A. Redman, K. K. Rigaud, J. Rockstr&ouml;m, J. Roy, E. L. F. Schipper, P. Schlosser, K. A. Schulz, K. Schumacher, L. Schwarz, M. Scown, B. &Scaron;edov&aacute;, T. A. Siddiqui, C. Singh, G. B. Sioen, D. Stammer, <u>N. J. Steinert</u>, S. Suk, R. Sutton, L. Thalheimer, M. van Aalst, K. van der Geest, Z. J. Zhao<br>
-          <em style="color: darkblue;">Global Sustainability</em>, 5, e20, 1-20 (2022). <a href="https://www.cambridge.org/core/journals/global-sustainability/article/ten-new-insights-in-climate-science-2022/62C90D59C9F9890791B64762EAA06B8D" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.1017/sus.2022.17" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1017/sus.2022.17" data-style="small_rectangle"></div>
-        </p>
-        
-        <p><a href="https://doi.org/10.1002/joc.7662" title="Article"><strong>Near-surface soil thermal regime and land-air temperature coupling: a case study over Spain</strong></a><br>
-          Melo-Aguilar, C. A., J. F. Gonz&aacute;lez-Rouco, <u>N. J. Steinert</u>, H. Beltrami, F. Cuesta-Valero, A. Garc&iacute;a-Garc&iacute;a, F. Garc&iacute;a-Pereira, E. Garc&iacute;a-Bustamante, P. Rold&aacute;n-G&oacute;mez, T. Schmid and J. Navarro<br>
-          <em style="color: darkblue;">International Journal of Climatology</em>, 42(15), 7516-7534 (2022). <a href="https://doi.org/10.1002/joc.7662" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.1002/joc.7662" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1002/joc.7662" data-style="small_rectangle"></div>
-        </p>
-        
-        <p><strong>Impact of improved land surface model physics on simulated climate variability and change</strong><br>
-          <u>Steinert, N.</u><br>
-          <em >Thesis</em> (2022). <a href="https://eprints.ucm.es/id/eprint/71397/" title="Thesis"><i class="fa fa-file-alt"></i></a><br>
-        </p>
-        
+        <div class="year-block">
+          <h2 class="year-heading">2022</h2>
+
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.5194/esd-13-1641-2022"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.5194/esd-13-1641-2022" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.5194/esd-13-1641-2022" target="_blank">Emit now, mitigate later? Earth system reversibility under overshoots of different magnitude and durations</a></p>
+              <p class="pub-authors">Schwinger, J., A. Asaadi, <strong>N. J. Steinert</strong>, H. Lee</p>
+              <p class="pub-journal">Earth System Dynamics, <span>13(4), 1641–1665</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/esd-13-1641-2022" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1017/sus.2022.20"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1017/sus.2022.20" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://www.cambridge.org/core/journals/global-sustainability/article/ten-new-insights-in-climate-science-2022/62C90D59C9F9890791B64762EAA06B8D" target="_blank">Ten new insights in climate science 2022</a></p>
+              <p class="pub-authors">Martin, M., E. A. Boakye, E. Boyd, W. Broadgate, M. Bustamante, J. G. Canadell, E. R. Carr, E. K. Chu, H. Cleugh, S. Csevár, M. Daoudy, A. de Bremond, M. Dhimal, K. L. Ebi, C. Edwards, S. Fuss, M. P. Girardin, B. Glavovic, S. Hebden, M. Hirota, H.-H. Hsu, S. Huq, K. Ingold, O. M. Johannessen, Y. Kameyama, N. Kumarasinghe, G. S. Langendijk, T. Lissner, S. Lwasa, C. Machalaba, A. Maltais, M. V. Mathai, C. Mbow, K. E. McNamara, A. Mukherji, V. Murray, J. Mysiak, C. Okereke, D. Ospina, F. Otto, A. Prakash, J. M. Pulhin, E. Raju, A. Redman, K. K. Rigaud, J. Rockström, J. Roy, E. L. F. Schipper, P. Schlosser, K. A. Schulz, K. Schumacher, L. Schwarz, M. Scown, B. Šedová, T. A. Siddiqui, C. Singh, G. B. Sioen, D. Stammer, <strong>N. J. Steinert</strong>, S. Suk, R. Sutton, L. Thalheimer, M. van Aalst, K. van der Geest, Z. J. Zhao</p>
+              <p class="pub-journal">Global Sustainability, <span>5, e20, 1–20</span></p>
+            </div>
+            <a class="pub-doi" href="https://www.cambridge.org/core/journals/global-sustainability/article/ten-new-insights-in-climate-science-2022/62C90D59C9F9890791B64762EAA06B8D" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1002/joc.7662"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1002/joc.7662" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.1002/joc.7662" target="_blank">Near-surface soil thermal regime and land-air temperature coupling: a case study over Spain</a></p>
+              <p class="pub-authors">Melo-Aguilar, C. A., J. F. González-Rouco, <strong>N. J. Steinert</strong>, H. Beltrami, F. Cuesta-Valero, A. García-García, F. García-Pereira, E. García-Bustamante, P. Roldán-Gómez, T. Schmid, J. Navarro</p>
+              <p class="pub-journal">International Journal of Climatology, <span>42(15), 7516–7534</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.1002/joc.7662" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title"><a href="https://eprints.ucm.es/id/eprint/71397/" target="_blank">Impact of improved land surface model physics on simulated climate variability and change</a></p>
+              <p class="pub-authors"><strong>Steinert, N.</strong></p>
+              <p class="pub-journal" style="font-style: normal; color: var(--muted2);">PhD Thesis, Complutense University of Madrid</p>
+            </div>
+            <a class="pub-doi" href="https://eprints.ucm.es/id/eprint/71397/" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> Link</a>
+          </div>
+
+        </div>
+
         <!-- 2021 -->
-        <h2><strong>2021</strong></h2>
-        
-        <p><a href="https://doi.org/10.1175/JHM-D-21-0024.1" title="Article"><strong>Increasing the Depth of a Land Surface Model. Part I: Impacts on the Subsurface Thermal Regime and Energy Storage</strong></a><br>
-          Gonz&aacute;lez-Rouco, J. F., <u>N. J. Steinert</u>, E. Garc&iacute;a-Bustamante, S. Hagemann, P. de Vrese, J. H. Jungclaus, S. J. Lorenz, C. Melo-Aguilar, F. Garc&iacute;a-Pereira, and J. Navarro<br>
-          <em style="color: darkblue;">Journal of Hydrometeorology</em>, 22(12), 3211-3230 (2021). <a href="https://doi.org/10.1175/JHM-D-21-0024.1" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.1175/JHM-D-21-0024.1" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1175/JHM-D-21-0024.1" data-style="small_rectangle"></div>
-        </p>
-        
-        <p><a href="https://doi.org/10.1175/JHM-D-21-0023.1" title="Article"><strong>Increasing the Depth of a Land Surface Model. Part II: Temperature Sensitivity to Improved Subsurface Thermodynamics and Associated Permafrost Response</strong></a><br>
-          <u>Steinert, N. J.</u>, J. F. Gonz&aacute;lez-Rouco, P. de Vrese, E. Garc&iacute;a-Bustamante, S. Hagemann, C. Melo-Aguilar, J. H. Jungclaus, and S. J. Lorenz<br>
-          <em style="color: darkblue;">Journal of Hydrometeorology</em>, 22(12), 3231-3254 (2021). <a href="https://doi.org/10.1175/JHM-D-21-0023.1" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.1175/JHM-D-21-0023.1" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1175/JHM-D-21-0023.1" data-style="small_rectangle"></div>
-        </p>
-        
-        <p><a href="https://doi.org/10.1029/2021GL094273" title="Article"><strong>Agreement of Analytical and Simulation-Based Estimates of the Required Land Depth in Climate Models</strong></a><br>
-          <u>Steinert, N. J.</u>, J. F. Gonz&aacute;lez-Rouco, C. A. Melo Aguilar, F. Garc&iacute;a-Pereira, E. Garc&iacute;a-Bustamante, P. de Vrese, V. Alexeev, J. H. Jungclaus, S. J. Lorenz, S. Hagemann<br>
-          <em style="color: darkblue;">Geophysical Research Letters</em>, 48(20), e2021GL094273 (2021). <a href="https://doi.org/10.1029/2021GL094273" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.1029/2021GL094273" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.1029/2021GL094273" data-style="small_rectangle"></div>
-        </p>
-        
-        <p><a href="https://editorial.tirant.com/es/libro/cambio-climatico-en-el-mediterraneo-juan-romero-9788418534195" title="Book"><strong>Cambio clim&aacute;tico: una perspectiva global.</strong></a><br>
-          Gonz&aacute;lez-Rouco J. F., Garc&iacute;a-Bustamante, E., F. Garc&iacute;a Pereira, Lucio Eceiza, E., Melo Aguilar, C., Navarro Montesinos, J., Rojas Labanda, C., Rold&aacute;n, P., <u>Steinert, N.</u>, and Vegas Ca&ntilde;as, C.: <br>
-          In: <em >Cambio clim&aacute;tico en el Mediterr&aacute;neo: procesos, riesgos y pol&iacute;ticas</em>. Romero J., J. Olcina (Eds.). Ch. 2, 49-73, 2021, Tirant Humanidades, Valencia. <a href="https://editorial.tirant.com/es/libro/cambio-climatico-en-el-mediterraneo-juan-romero-9788418534195" title="Book"><i class="fa fa-file-alt"></i></a><br>
-        </p>
-        
+        <div class="year-block">
+          <h2 class="year-heading">2021</h2>
+
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1175/JHM-D-21-0024.1"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1175/JHM-D-21-0024.1" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.1175/JHM-D-21-0024.1" target="_blank">Increasing the Depth of a Land Surface Model. Part I: Impacts on Subsurface Thermal Regime and Energy Storage</a></p>
+              <p class="pub-authors">González-Rouco, J. F., <strong>N. J. Steinert</strong>, E. García-Bustamante, S. Hagemann, P. de Vrese, J. H. Jungclaus, S. J. Lorenz, C. Melo-Aguilar, F. García-Pereira, J. Navarro</p>
+              <p class="pub-journal">Journal of Hydrometeorology, <span>22(12), 3211–3230</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.1175/JHM-D-21-0024.1" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1175/JHM-D-21-0023.1"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1175/JHM-D-21-0023.1" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.1175/JHM-D-21-0023.1" target="_blank">Increasing the Depth of a Land Surface Model. Part II: Temperature Sensitivity to Improved Subsurface Thermodynamics and Associated Permafrost Response</a></p>
+              <p class="pub-authors"><strong>Steinert, N. J.</strong>, J. F. González-Rouco, P. de Vrese, E. García-Bustamante, S. Hagemann, C. Melo-Aguilar, J. H. Jungclaus, S. J. Lorenz</p>
+              <p class="pub-journal">Journal of Hydrometeorology, <span>22(12), 3231–3254</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.1175/JHM-D-21-0023.1" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.1029/2021GL094273"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.1029/2021GL094273" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.1029/2021GL094273" target="_blank">Agreement of Analytical and Simulation-Based Estimates of the Required Land Depth in Climate Models</a></p>
+              <p class="pub-authors"><strong>Steinert, N. J.</strong>, J. F. González-Rouco, C. A. Melo Aguilar, F. García-Pereira, E. García-Bustamante, P. de Vrese, V. Alexeev, J. H. Jungclaus, S. J. Lorenz, S. Hagemann</p>
+              <p class="pub-journal">Geophysical Research Letters, <span>48(20), e2021GL094273</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.1029/2021GL094273" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+          
+          <div class="pub-entry no-badge">
+            <div>
+              <p class="pub-title"><a href="https://editorial.tirant.com/es/libro/cambio-climatico-en-el-mediterraneo-juan-romero-9788418534195" target="_blank">Cambio climático: una perspectiva global</a></p>
+              <p class="pub-authors">González-Rouco, J. F., E. García-Bustamante, F. García-Pereira, E. Lucio Eceiza, C. Melo-Aguilar, J. Navarro Montesinos, C. Rojas Labanda, P. Roldán, <strong>N. J. Steinert</strong>, C. Vegas Cañas</p>
+              <p class="pub-journal" style="font-style: normal; color: var(--muted2);">Book chapter in<em>Cambio climático en el Mediterráneo</em>, Ch. 2, 49–73. Tirant Humanidades, Valencia.</p>
+            </div>
+            <a class="pub-doi" href="https://editorial.tirant.com/es/libro/cambio-climatico-en-el-mediterraneo-juan-romero-9788418534195" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> Link</a>
+          </div>
+
+        </div>
+
         <!-- 2020 -->
-        <h2><strong>2020</strong></h2>
+        <div class="year-block">
+          <h2 class="year-heading">2020</h2>
+
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.5194/cp-16-453-2020"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.5194/cp-16-453-2020" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.5194/cp-16-453-2020" target="_blank">Methodological and physical biases in global to subcontinental borehole temperature reconstructions: a pseudo-proxy perspective</a></p>
+              <p class="pub-authors">Melo-Aguilar, C., J. F. González-Rouco, E. García-Bustamante, <strong>N. Steinert</strong>, J. H. Jungclaus, J. Navarro, P. J. Roldán-Gómez</p>
+              <p class="pub-journal">Climate of the Past, <span>16, 453–474</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/cp-16-453-2020" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+
+        </div>
         
-        <p><a href="https://doi.org/10.5194/cp-16-453-2020" title="Article"><strong>Methodological and physical biases in global to subcontinental borehole temperature reconstructions: an assessment from a pseudo-proxy perspective</strong></a><br>
-          Melo-Aguilar, C., Gonz&aacute;lez-Rouco, J. F., Garc&iacute;a-Bustamante, E., <u>Steinert, N.</u>, Jungclaus, J. H., Navarro, J., and Rold&aacute;n-G&oacute;mez, P. J.<br>
-          <em style="color: darkblue;">Climate of the Past</em>, 16, 453-474 (2020). <a href="https://doi.org/10.5194/cp-16-453-2020" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.5194/cp-16-453-2020" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.5194/cp-16-453-2020" data-style="small_rectangle"></div>
-        </p>
-      
         <!-- 2018 -->
-        <h2><strong>2018</strong></h2>
+        <div class="year-block">
+          <h2 class="year-heading">2018</h2>
 
-        <p><a href="https://doi.org/10.5194/cp-14-1583-2018" title="Article"><strong>Influence of radiative forcing factors on ground-air temperature coupling during the last millennium: implications for borehole climatology</strong></a><br>
-          Melo-Aguilar, C., Gonz&aacute;lez-Rouco, J. F., Garc&iacute;a-Bustamante, E., Navarro-Montesinos, J., and <u>Steinert, N.</u><br>
-          <em style="color: darkblue;">Climate of the Past</em>, 14, 1583-1606 (2018). <a href="https://doi.org/10.5194/cp-14-1583-2018" title="Article"><i class="fa fa-file-alt"></i></a><br>
-          <div class="altmetric-embed" data-doi="10.5194/cp-14-1583-2018" data-badge-type="badge"> </div>
-          <div class="__dimensions_badge_embed__" data-doi="10.5194/cp-14-1583-2018" data-style="small_rectangle"></div>
-        </p>
+          <div class="pub-entry">
+            <div class="pub-badges">
+              <div class="altmetric-embed" data-badge-type="donut" data-doi="10.5194/cp-14-1583-2018"></div>
+              <div class="__dimensions_badge_embed__" data-doi="10.5194/cp-14-1583-2018" data-hide-zero-citations="true" data-style="small_rectangle"></div></div>
+            <div>
+              <p class="pub-title"><a href="https://doi.org/10.5194/cp-14-1583-2018" target="_blank">Influence of radiative forcing factors on ground-air temperature coupling during the last millennium</a></p>
+              <p class="pub-authors">Melo-Aguilar, C., J. F. González-Rouco, E. García-Bustamante, J. Navarro-Montesinos, <strong>N. Steinert</strong></p>
+              <p class="pub-journal">Climate of the Past, <span>14, 1583–1606</span></p>
+            </div>
+            <a class="pub-doi" href="https://doi.org/10.5194/cp-14-1583-2018" target="_blank"><i aria-hidden="true" class="ti ti-external-link"></i> DOI</a>
+          </div>
+
+        </div>
+
+        <hr class="divider">
         
-      </div>
-
-      <br>
-      <h1>Reports</h1>
-      <div class="publications-cont">
-
-        <p>Lenton, T. M., Milkoreit, M., Willcock, S., Abrams, J.F., Armstrong McKay, D.I., Buxton, J.E., Donges, J.F., Loriani, S., Wunderling, N., Alkemade, F., Barrett, M., Constantino, S., Powell, T., Smith, S.R., Boulton, C. A., Pinho, P., Dijkstra, H.A. Pearce-Kelly, P., Roman-Cuesta, R.M., Dennis, D. (eds), 2025, <strong>Global Tipping Points Report 2025</strong>. University of Exeter, Exeter, UK.<br>
-        <a href="https://global-tipping-points.org" title="Report"><i class="fa fa-file-alt"></i></a>
-        </p>
-
-        <p>Kitzmann, N.H.,  L. Caesar, B. Sakschewski and J. Rockstr&ouml;m (eds), 2025, <strong>Planetary Health Check 2025</strong>. Potsdam Institute for Climate Impact Research (PIK), Potsdam, Germany.<br>
-        <a href="https://planetaryhealthcheck.org/" title="Report"><i class="fa fa-file-alt"></i></a>
-        </p>
-
-        <p>T. M. Lenton, D.I. Armstrong McKay, S. Loriani, J.F. Abrams, S.J. Lade, J.F. Donges, M. Milkoreit, T. Powell, S.R. Smith, C. Zimm, J.E. Buxton, E. Bailey, L. Laybourn, A. Ghadiali, J.G. Dyke (eds), 2023, <strong>Global Tipping Points Report 2023</strong>. University of Exeter, Exeter, UK.<br>
-        <a href="https://global-tipping-points.org" title="Report"><i class="fa fa-file-alt"></i></a>
-        </p>
+        <!-- Reports -->
+        <span class="label">Reports</span>
+        <div class="report-entry">Lenton, T. M., M. Milkoreit, S. Willcock, J. F. Abrams, D. I. Armstrong McKay, J. E. Buxton, J. F. Donges, S. Loriani, N. Wunderling, F. Alkemade, M. Barrett, S. Constantino, T. Powell, S. R. Smith, C. A. Boulton, P. Pinho, H. A. Dijkstra, P. Pearce-Kelly, R. M. Roman-Cuesta, D. Dennis (eds), 2025 —<strong>Global Tipping Points Report 2025</strong>. University of Exeter, Exeter, UK.<br><a href="https://global-tipping-points.org" target="_blank">global-tipping-points.org</a></div>
+        <div class="report-entry">Kitzmann, N. H., L. Caesar, B. Sakschewski, J. Rockström (eds), 2025 —<strong>Planetary Health Check 2025</strong>. Potsdam Institute for Climate Impact Research (PIK), Potsdam, Germany.<br><a href="https://planetaryhealthcheck.org/" target="_blank">planetaryhealthcheck.org</a></div>
+        <div class="report-entry">Lenton, T. M., D. I. Armstrong McKay, S. Loriani, J. F. Abrams, S. J. Lade, J. F. Donges, M. Milkoreit, T. Powell, S. R. Smith, C. Zimm, J. E. Buxton, E. Bailey, L. Laybourn, A. Ghadiali, J. G. Dyke (eds), 2023 —<strong>Global Tipping Points Report 2023</strong>. University of Exeter, Exeter, UK.<br><a href="https://global-tipping-points.org" target="_blank">global-tipping-points.org</a></div>
+        <div class="report-entry">Future Earth, The Earth League, WCRP (2023) —<strong>10 New Insights in Climate Science 2023/2024</strong>. Stockholm.<br><a href="https://10insightsclimate.science" target="_blank">10insightsclimate.science</a></div>
+        <div class="report-entry">Future Earth, The Earth League, WCRP (2022) —<strong>10 New Insights in Climate Science 2022</strong>. Stockholm.<br><a href="https://10insightsclimate.science" target="_blank">10insightsclimate.science</a></div>
+        <hr class="divider">
         
-        <p>Future Earth, The Earth League, WCRP (2023), <strong>10 New Insights in Climate Science 2023/2024</strong>. Stockholm<br>
-        <a href="https://10insightsclimate.science" title="Report"><i class="fa fa-file-alt"></i></a>
-        </p>
-        
-        <p>Future Earth, The Earth League, WCRP (2022), <strong>10 New Insights in Climate Science 2022</strong>. Stockholm<br>
-        <a href="https://10insightsclimate.science" title="Report"><i class="fa fa-file-alt"></i></a>
-        </p>
-        
-      </div>
-
-      <br>
-      <h1>Datasets</h1>
-      <div class="publications-cont">
-
-        <p>Dataset: Underestimated land heat uptake alters the global energy distribution in CMIP6 climate models</em><br>
-          <a href="https://zenodo.org/records/10669977" title="Dataset"><i class="fa fa-external-link-alt"></i></a>
-        </p>
-
-        <p>Distribution maps of Biosphere and Cryosphere tipping elements</em><br>
-        <a href="https://zenodo.org/records/10119479" title="Dataset"><i class="fa fa-external-link-alt"></i></a>
-        </p>  
-
-        <p>Dataset: Evaluating permafrost definitions for global permafrost area estimates in CMIP6 climate models</em><br>
-        <a href="https://zenodo.org/records/10103001" title="Dataset"><i class="fa fa-external-link-alt"></i></a>
-        </p>
-        
-      </div>
-    </div>    
-       
-    <footer class="footer">
-      &copy;2026 Norman J. Steinert
-    </footer>
-
-  </body>
+        <!-- Datasets -->
+        <span class="label">Datasets</span>
+        <div class="report-entry">Underestimated land heat uptake alters the global energy distribution in CMIP6 climate models<br><a href="https://zenodo.org/records/10669977" target="_blank">zenodo.org/records/10669977</a></div>
+        <div class="report-entry">Distribution maps of Biosphere and Cryosphere tipping elements<br><a href="https://zenodo.org/records/10119479" target="_blank">zenodo.org/records/10119479</a></div>
+        <div class="report-entry">Evaluating permafrost definitions for global permafrost area estimates in CMIP6 climate models<br><a href="https://zenodo.org/records/10103001" target="_blank">zenodo.org/records/10103001</a></div></div>
+      
+        <!-- /page -->
+      <footer class="footer"><span>© 2026 Norman J. Steinert</span><a href="https://cicero.oslo.no" target="_blank">CICERO Centre for International Climate Research<i aria-hidden="true" class="ti ti-external-link"></i></a></footer>
+      <!-- Altmetric --> <script src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js" type="text/javascript">
+    </script> <!-- Dimensions --> <script async charset="utf-8" src="https://badge.dimensions.ai/badge.js">
+    </script>
+  
+</body>
 </html>
