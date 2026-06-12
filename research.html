@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <style>
+
     .page-hero {
       padding: 56px 48px 48px;
       border-bottom: 0.5px solid var(--border);
@@ -26,59 +27,136 @@
       max-width: 680px;
     }
 
-    /* ---- Research highlight card ---- */
-    .highlight {
-      padding: 44px 0;
-      border-bottom: 0.5px solid var(--border);
+    /* ── Grid ────────────────────────────────────────────── */
+    .highlights-grid {
+      padding: 48px 48px 64px;
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
+      align-items: start;
     }
 
-    .highlight:last-child { border-bottom: none; }
+    /* ── Card shell ──────────────────────────────────────── */
+    .hl-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
 
-    .highlight-header {
+    .hl-card:hover {
+      border-color: var(--border2);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .hl-card.open {
+      border-color: rgba(75, 158, 255, 0.35);
+    }
+
+    /* ── Visual: square image ────────────────────────────── */
+    .hl-visual {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: block;
+      overflow: hidden;
+      background: var(--surface2);
+    }
+
+    .hl-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .hl-card:hover .hl-visual img {
+      transform: scale(1.03);
+    }
+
+    /* ── Card header bar ─────────────────────────────────── */
+    .hl-header {
+      padding: 14px 18px 12px;
       display: flex;
       align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
+      border-top: 0.5px solid var(--border);
     }
 
-    .highlight-num {
-      font-size: 11px;
-      letter-spacing: 0.12em;
+    .hl-num {
+      font-size: 10px;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
       color: var(--accent);
       font-weight: 500;
       white-space: nowrap;
-      padding-top: 4px;
+      padding-top: 3px;
+      flex-shrink: 0;
     }
 
-    .highlight-title {
+    .hl-title {
       font-family: var(--serif);
-      font-size: 22px;
+      font-size: 15px;
+      line-height: 1.35;
       color: var(--text);
-      line-height: 1.3;
       flex: 1;
     }
 
-    .highlight-body {
-      font-size: 14px;
-      line-height: 1.85;
-      color: var(--text3);
+    .hl-chevron {
+      font-size: 16px;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: transform 0.3s, color 0.2s;
+      padding-top: 2px;
     }
 
-    .highlight-cite {
-      background: var(--surface);
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px 18px;
+    .hl-card.open .hl-chevron {
+      transform: rotate(180deg);
+      color: var(--accent);
+    }
+
+    /* ── Expandable body ─────────────────────────────────── */
+    .hl-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease;
+    }
+
+    .hl-card.open .hl-body {
+      grid-template-rows: 1fr;
+    }
+
+    .hl-body-inner {
+      overflow: hidden;
+    }
+
+    .hl-body-content {
+      padding: 0 18px 18px;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .hl-desc {
       font-size: 13px;
+      line-height: 1.8;
+      color: var(--text3);
+      margin-bottom: 14px;
+      padding-top: 14px;
+    }
+
+    .hl-cite {
+      background: var(--surface2);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 12px;
       color: var(--muted2);
       line-height: 1.7;
     }
 
-    .highlight-cite strong {
+    .hl-cite strong {
       color: var(--text2);
     }
 
@@ -87,23 +165,33 @@
       color: var(--accent2);
     }
 
-    .highlight-link {
+    .hl-link {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       margin-top: 10px;
-      font-size: 12px;
+      font-size: 11px;
       color: var(--accent);
       font-weight: 500;
       letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
-    .highlight-link:hover { color: var(--text2); }
+    .hl-link:hover {
+      color: var(--text2);
+    }
 
-    @media (max-width: 700px) {
-      .page-hero { padding: 40px 20px 36px; }
-      .highlight { padding: 36px 0; }
-      .highlight-title { font-size: 18px; }
+    @media (max-width: 800px) {
+      .highlights-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 32px 20px 48px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .highlights-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -122,124 +210,287 @@
 
   <div class="page-hero">
     <h1 class="page-title">Research Highlights</h1>
-    <p class="page-intro">Selected contributions spanning climate overshoot, permafrost dynamics, Earth energy partitioning, and tipping point interactions — with a focus on the long-term reversibility of the Earth system under mitigation scenarios.</p>
+    <p class="page-intro">Selected research highlights on long-term reversibility of the Earth system under mitigation and overshoot scenarios, tipping point interactions, and land–climate feedbacks.</p>
   </div>
 
-  <div class="page" style="padding-top: 0;">
+  <div class="highlights-grid">
 
-    <div class="highlight">
-      <div class="highlight-header">
-        <span class="highlight-num">01</span>
-        <h2 class="highlight-title">Overconfidence in climate overshoot</h2>
+    <!-- 01 -->
+    <div class="hl-card open" onclick="toggleCard(this)">
+      <div class="hl-visual">
+        <img src="images/Steinert_et_al_2026_ERL.png" alt="Tipping elements overshoot figure">
       </div>
-      <p class="highlight-body">
-        Global emission reduction efforts continue to fall short of Paris Agreement targets, making systematic exploration of overshoot pathways a priority for science and policy. This study shows that climate change risks after an overshoot differ substantially from a world that avoids it. Achieving declining global temperatures can limit long-term risks compared with mere stabilization, including for sea-level rise and cryosphere changes. However, strong Earth-system feedbacks could undercut temperature reversal, resulting in high near-term and continuous long-term warming. We identify a geophysical need for preventive carbon dioxide removal capacity of several hundred gigatonnes — yet technical, economic, and sustainability constraints may limit deployment at such scales.
-      </p>
-      <div class="highlight-cite">
-        <p>Schleussner, C.-F., G. Ganti, Q. Lejeune, ..., <strong>N. J. Steinert</strong>, ..., et al.: Overconfidence in climate overshoot. <span class="cite-journal">Nature</span>, 634, 366–373 (2024).</p>
-        <a class="highlight-link" href="https://doi.org/10.1038/s41586-024-08020-9" target="_blank">
-          <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1038/s41586-024-08020-9
-        </a>
+      <div class="hl-header">
+        <span class="hl-num">01</span>
+        <h2 class="hl-title">Permafrost carbon–climate feedback amplifies Earth system tipping risks</h2>
+        <i class="ti ti-chevron-down hl-chevron" aria-hidden="true"></i>
+      </div>
+      <div class="hl-body">
+        <div class="hl-body-inner">
+          <div class="hl-body-content">
+            <p class="hl-desc">Many current-generation climate models omit the permafrost carbon–climate feedback (PCF), limiting projections of long-term temperature outcomes and associated tipping risks. Integrating permafrost carbon emissions into a chain of simple climate and tipping network models, including the Greenland and West Antarctic ice sheets, AMOC, and the Amazon, we find that PCF increases the probability of exceeding one or more tipping elements by up to 50% and can accelerate the timing of tipping events by hundreds to thousands of years. The effect is most pronounced in low-to-mid overshoot scenarios with peak temperatures below 2–3°C, where PCF-induced warming pushes systems across thresholds they would otherwise narrowly avoid, narrowing the critical temperature space for safe overshoot pathways.</p>
+            <div class="hl-cite">
+              <p><strong>Steinert, N. J.</strong>, G. Munday, M. Sandstad, B. M. Sanderson, N. Wunderling: Permafrost carbon–climate feedback amplifies Earth system tipping risks. <span class="cite-journal">Environmental Research Letters</span>, 21, 124008 (2026).</p>
+              <a class="hl-link" href="https://doi.org/10.1088/1748-9326/ae7586" target="_blank">
+                <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1088/1748-9326/ae7586
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="highlight">
-      <div class="highlight-header">
-        <span class="highlight-num">02</span>
-        <h2 class="highlight-title">Permafrost-thaw impacts despite the absence of a global tipping point</h2>
+    <!-- 02 -->
+    <div class="hl-card open" onclick="toggleCard(this)">
+      <div class="hl-visual">
+        <img src="images/Ritchie_et_al_2026.png" alt="Tipping elements overshoot figure">
       </div>
-      <p class="highlight-body">
-        Arctic permafrost contains a substantial climate-sensitive carbon pool. The existence of a global tipping point — a warming threshold beyond which permafrost thaw would self-perpetuate — remains debated. This perspective argues that despite feedbacks driving rapid and irreversible thaw at local to regional scales, the accumulated Arctic permafrost response to warming remains quasilinear. Without a global tipping point, there is no safety margin within which permafrost loss is acceptable: each increment of warming exposes more land to thaw, driving detrimental local impacts and global feedbacks.
-      </p>
-      <div class="highlight-cite">
-        <p>Nitzbon, J., T. Schneider von Deimling, M. Aliyeva, ..., <strong>N. J. Steinert</strong>, ..., et al.: No respite from permafrost-thaw impacts in absence of a global tipping point. <span class="cite-journal">Nature Climate Change</span> (2024).</p>
-        <a class="highlight-link" href="https://doi.org/10.1038/s41558-024-02011-4" target="_blank">
-          <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1038/s41558-024-02011-4
-        </a>
+      <div class="hl-header">
+        <span class="hl-num">02</span>
+        <h2 class="hl-title">Implications of overshooting 1.5°C on Earth system tipping elements</h2>
+        <i class="ti ti-chevron-down hl-chevron" aria-hidden="true"></i>
       </div>
-    </div>
-
-    <div class="highlight">
-      <div class="highlight-header">
-        <span class="highlight-num">03</span>
-        <h2 class="highlight-title">Underestimated land heat uptake in CMIP6 models</h2>
-      </div>
-      <p class="highlight-body">
-        Current global warming produces heat uptake distributed across all components of the climate system, but current-generation models deliver estimates that diverge from observations. Using fully-coupled CMIP6 experiments including an MPI-ESM version with a deep land model component, this work shows that sufficiently deep land models exhibit increased subsurface heat uptake — yielding an Earth system heat partitioning closer to observational estimates. Results highlight the importance of the land heat sink in global energy accounting.
-      </p>
-      <div class="highlight-cite">
-        <p><strong>Steinert, N. J.</strong>, F. J. Cuesta-Valero, F. García-Pereira, P. de Vrese, ..., J. F. González-Rouco: Underestimated Land Heat Uptake Alters the Global Energy Distribution in CMIP6 Climate Models. <span class="cite-journal">Geophysical Research Letters</span>, 51(10) (2024).</p>
-        <a class="highlight-link" href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2023GL107613" target="_blank">
-          <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1029/2023GL107613
-        </a>
+      <div class="hl-body">
+        <div class="hl-body-inner">
+          <div class="hl-body-content">
+            <p class="hl-desc">Global warming is increasingly likely to exceed 1.5°C, temporarily surpassing tipping thresholds for several Earth system components. This review shows that minimising both the magnitude and duration of any overshoot is vital for reducing tipping risks. Fast-responding systems such as tropical coral reefs are especially vulnerable even to brief overshoots, while slow response system, such as ice sheets, may still be avoidable if warming is reversed quickly.</p>
+            <div class="hl-cite">
+              <p>Ritchie*, P. D. L., <strong>N. J. Steinert*</strong>, J. F. Abrams, …, N. Wunderling*: The implications of overshooting 1.5°C on Earth system tipping elements — a review. <span class="cite-journal">Environmental Research Letters</span>, 21, 043001 (2026).</p>
+              <a class="hl-link" href="https://doi.org/10.1088/1748-9326/ae3cad" target="_blank">
+                <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1088/1748-9326/ae3cad
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="highlight">
-      <div class="highlight-header">
-        <span class="highlight-num">04</span>
-        <h2 class="highlight-title">Overshooting 1.5°C is fast becoming inevitable</h2>
+    <!-- 03 -->
+    <div class="hl-card open" onclick="toggleCard(this)">
+      <div class="hl-visual">
+        <img src="images/Schleussner_et_al_2024.png" alt="Tipping elements overshoot figure">
       </div>
-      <p class="highlight-body">
-        Research post-IPCC AR6 indicates that overshooting 1.5°C is all but inevitable in the near term. Returning below this threshold requires net-negative CO2 emissions, which carries significant feasibility uncertainties. During overshoot, natural carbon sinks could be triggered in ways not yet anticipated, prolonging elevated temperatures. Widespread and potentially irreversible impacts worsen with higher magnitude and longer overshoot duration, especially for marine biodiversity, ice sheets, and tropical regions. Self-perpetuating feedbacks at sustained warming above 2°C carry considerable risk of triggering ice sheet instabilities.
-      </p>
-      <div class="highlight-cite">
-        <p>Bustamante, M., ..., <strong>N. J. Steinert</strong>, ..., et al.: Ten new insights in climate science 2023/2024. <span class="cite-journal">Global Sustainability</span> (2024).</p>
-        <a class="highlight-link" href="https://www.cambridge.org/core/journals/global-sustainability/article/ten-new-insights-in-climate-science-20232024/F7F1C10C07FD241BFE30ACC4BA555A56" target="_blank">
-          <i class="ti ti-external-link" aria-hidden="true"></i> Global Sustainability
-        </a>
+      <div class="hl-header">
+        <span class="hl-num">03</span>
+        <h2 class="hl-title">Overconfidence in climate overshoot</h2>
+        <i class="ti ti-chevron-down hl-chevron" aria-hidden="true"></i>
       </div>
-    </div>
-
-    <div class="highlight">
-      <div class="highlight-header">
-        <span class="highlight-num">05</span>
-        <h2 class="highlight-title">Climate tipping point interactions and cascades</h2>
-      </div>
-      <p class="highlight-body">
-        Climate tipping elements — including the Greenland Ice Sheet, AMOC, permafrost, monsoon systems, and the Amazon — may transgress critical thresholds under ongoing warming. While knowledge of individual tipping elements has improved, their interactions are less well understood. This review maps current understanding of tipping element interactions by gathering evidence from model simulations, observations, conceptual reasoning, and paleoclimate reconstructions. Key knowledge gaps are identified and future research directions outlined.
-      </p>
-      <div class="highlight-cite">
-        <p>Wunderling, N., A. von der Heydt, ..., <strong>N. J. Steinert</strong>, ..., et al.: Climate tipping point interactions and cascades: A review. <span class="cite-journal">Earth System Dynamics</span>, 15(1), 41–74 (2024).</p>
-        <a class="highlight-link" href="https://esd.copernicus.org/articles/15/41/2024/esd-15-41-2024.html" target="_blank">
-          <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.5194/esd-15-41-2024
-        </a>
+      <div class="hl-body">
+        <div class="hl-body-inner">
+          <div class="hl-body-content">
+            <p class="hl-desc">Climate change risks after a temperature overshoot differ substantially from a world that avoids it. Achieving declining global temperatures can limit long-term risks, including for sea-level rise and cryosphere changes, compared with mere stabilization. However, strong Earth-system feedbacks could undercut temperature reversal, and the study identifies a geophysical need for preventive carbon dioxide removal capacity of several hundred gigatonnes.</p>
+            <div class="hl-cite">
+              <p>Schleussner, C.-F., G. Ganti, Q. Lejeune, …, <strong>N. J. Steinert</strong>, …, J. Rogelj: Overconfidence in climate overshoot. <span class="cite-journal">Nature</span>, 634, 366–373 (2024).</p>
+              <a class="hl-link" href="https://doi.org/10.1038/s41586-024-08020-9" target="_blank">
+                <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1038/s41586-024-08020-9
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="highlight">
-      <div class="highlight-header">
-        <span class="highlight-num">06</span>
-        <h2 class="highlight-title">Future permafrost hydrology and its far-reaching climate impacts</h2>
+    <!-- 04 -->
+    <div class="hl-card open" onclick="toggleCard(this)">
+      <div class="hl-visual">
+        <img src="images/Wunderling_et_al_2024.png" alt="Tipping elements overshoot figure">
       </div>
-      <p class="highlight-body">
-        Inter-model differences in Arctic–subarctic climate stem partly from how permafrost hydrology is represented in land surface components. Using the MPI Earth System Model, this study shows that contrasting but equally plausible assumptions about permafrost hydrology determine whether simulated 21st-century soil moisture trends are wet or dry — with cascading effects on cloud cover, planetary energy uptake, and regional temperatures. These uncertainties affect the Earth system as far south as the tropics and highlight the need for stronger observational constraints on permafrost hydrology.
-      </p>
-      <div class="highlight-cite">
-        <p>de Vrese, P., G. Georgievski, ..., <strong>N. J. Steinert</strong>, ..., V. Brovkin: Representation of soil hydrology in permafrost regions may explain large part of inter-model spread in simulated Arctic and subarctic climate. <span class="cite-journal">The Cryosphere</span>, 17(5), 2095–2118 (2023).</p>
-        <a class="highlight-link" href="https://tc.copernicus.org/articles/17/2095/2023/" target="_blank">
-          <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.5194/tc-17-2095-2023
-        </a>
+      <div class="hl-header">
+        <span class="hl-num">04</span>
+        <h2 class="hl-title">Climate tipping point interactions and cascades</h2>
+        <i class="ti ti-chevron-down hl-chevron" aria-hidden="true"></i>
       </div>
-    </div>
-
-    <div class="highlight">
-      <div class="highlight-header">
-        <span class="highlight-num">07</span>
-        <h2 class="highlight-title">Earth system reversibility under temperature overshoots</h2>
-      </div>
-      <p class="highlight-body">
-        Carbon dioxide removal has been proposed as a means to partially reverse climate change after a period of temperature overshoot. Using a state-of-the-art Earth system model with explicit permafrost carbon representation, this study investigates reversibility across overshoot scenarios of varying duration and magnitude. For most large-scale indicators — surface temperature, marine and terrestrial productivity, AMOC strength — the legacy of an overshoot is indiscernible from a reference case on centennial timescales. Irreversibility is found for permafrost carbon and deep ocean properties. No evidence of tipping points or self-reinforcing feedbacks was detected.
-      </p>
-      <div class="highlight-cite">
-        <p>Schwinger, J., A. Asaadi, <strong>N. J. Steinert</strong>, H. Lee: Emit now, mitigate later? Earth system reversibility under overshoots of different magnitude and durations. <span class="cite-journal">Earth System Dynamics</span>, 13, 1641–1665 (2022).</p>
-        <a class="highlight-link" href="https://esd.copernicus.org/articles/13/1641/2022/" target="_blank">
-          <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.5194/esd-13-1641-2022
-        </a>
+      <div class="hl-body">
+        <div class="hl-body-inner">
+          <div class="hl-body-content">
+            <p class="hl-desc">Climate tipping elements may cross critical thresholds under continued warming. This review maps the interactions between tipping elements using evidence from model simulations, observations, conceptual reasoning, and paleoclimate reconstructions, identifying where climate tipping cascades are most plausible and where key knowledge gaps remain.</p>
+            <div class="hl-cite">
+              <p>Wunderling*, N., A. S. von der Heydt*, …, <strong>N. J. Steinert</strong>, …, M. Willeit: Climate tipping point interactions and cascades: a review. <span class="cite-journal">Earth System Dynamics</span>, 15(1), 41–74 (2024).</p>
+              <a class="hl-link" href="https://esd.copernicus.org/articles/15/41/2024/" target="_blank">
+                <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.5194/esd-15-41-2024
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-  </div><!-- /page -->
+    <!-- 05 -->
+    <div class="hl-card open" onclick="toggleCard(this)">
+      <div class="hl-visual">
+        <img src="images/Sanderson_et_al_2025.png" alt="Tipping elements overshoot figure">
+      </div>
+      <div class="hl-header">
+        <span class="hl-num">05</span>
+        <h2 class="hl-title">flat10MIP: diagnosing the climate response to positive, zero, and negative CO₂ emissions</h2>
+        <i class="ti ti-chevron-down hl-chevron" aria-hidden="true"></i>
+      </div>
+      <div class="hl-body">
+        <div class="hl-body-inner">
+          <div class="hl-body-content">
+            <p class="hl-desc">A new emissions-driven model intercomparison protocol establishes consistent diagnostics for the Transient Climate Response to Cumulative Emissions (TCRE), the Zero Emissions Commitment (ZEC), and climate reversibility. Using constant emissions near present-day values, the framework simplifies comparison across Earth system models and shows that ZEC estimates are on average 30% smaller under this protocol than under conventional 1pctCO₂ experiments.</p>
+            <div class="hl-cite">
+              <p>Sanderson, B. M., V. Brovkin, …, <strong>N. J. Steinert</strong>, …, T. Ziehn: flat10MIP: an emissions-driven experiment to diagnose the climate response to positive, zero, and negative CO₂ emissions. <span class="cite-journal">Geoscientific Model Development</span>, 18(17), 5699–5724 (2025).</p>
+              <a class="hl-link" href="https://gmd.copernicus.org/articles/18/5699/2025/" target="_blank">
+                <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.5194/gmd-18-5699-2025
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="hl-card open" onclick="toggleCard(this)">
+      <div class="hl-visual">
+        <img src="images/Steinert_Sanderson_2025.png" alt="Tipping elements overshoot figure">
+      </div>
+      <div class="hl-header">
+        <span class="hl-num">06</span>
+        <h2 class="hl-title">Normalizing the permafrost carbon feedback contribution to TCRE and ZEC</h2>
+        <i class="ti ti-chevron-down hl-chevron" aria-hidden="true"></i>
+      </div>
+      <div class="hl-body">
+        <div class="hl-body-inner">
+          <div class="hl-body-content">
+            <p class="hl-desc">As permafrost thaws, the permafrost carbon-climate feedback (PCF) amplifies TCRE and ZEC by adding greenhouse gases to the atmosphere. Using a permafrost carbon response model coupled to the simple climate model FaIR, this study quantifies the PCF's contribution to these key climate metrics and shows it can substantially increase their estimates. Relating the metrics to permafrost carbon emissions enables normalization of the PCF contribution, making its uncertainties more tractable.</p>
+            <div class="hl-cite">
+              <p><strong>Steinert, N. J.</strong> &amp; B. M. Sanderson: Normalizing the permafrost carbon feedback contribution to TCRE and the Zero Emissions Commitment. <span class="cite-journal">Earth System Dynamics</span>, 16(5), 1711–1721 (2025).</p>
+              <a class="hl-link" href="https://doi.org/10.5194/esd-16-1711-2025" target="_blank">
+                <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.5194/esd-16-1711-2025
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="hl-card open" onclick="toggleCard(this)">
+      <div class="hl-visual">
+        <img src="images/Munday_et_al_2025.png" alt="Tipping elements overshoot figure">
+      </div>
+      <div class="hl-header">
+        <span class="hl-num">07</span>
+        <h2 class="hl-title">Risks of unavoidable impacts on forests at 1.5°C with and without overshoot</h2>
+        <i class="ti ti-chevron-down hl-chevron" aria-hidden="true"></i>
+      </div>
+      <div class="hl-body">
+        <div class="hl-body-inner">
+          <div class="hl-body-content">
+            <p class="hl-desc">Even at 1.5°C, forest ecosystems face risks of irreversible impacts including Amazon forest loss and high-latitude woody encroachment. This study quantifies these risks across three scenarios exploring low levels of temperature exceedance, showing that some forest impacts are unavoidable regardless of whether warming is stabilized or overshoots the target, and that the duration of any overshoot critically determines the extent of irreversible change.</p>
+            <div class="hl-cite">
+              <p>Munday, G., C. D. Jones, <strong>N. J. Steinert</strong>, C. Mathison, E. Burke, C. Smith, C. Huntingford, R. Varney: Risks of unavoidable impacts on forests at 1.5°C with and without overshoot. <span class="cite-journal">Nature Climate Change</span>, 15, 650–655 (2025).</p>
+              <a class="hl-link" href="https://doi.org/10.1038/s41558-025-02327-9" target="_blank">
+                <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1038/s41558-025-02327-9
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="hl-card open" onclick="toggleCard(this)">
+      <div class="hl-visual">
+        <img src="images/Steinert_et_al_2025.png" alt="Tipping elements overshoot figure">
+      </div>
+      <div class="hl-header">
+        <span class="hl-num">08</span>
+        <h2 class="hl-title">Irreversible land water availability after temperature overshoot</h2>
+        <i class="ti ti-chevron-down hl-chevron" aria-hidden="true"></i>
+      </div>
+      <div class="hl-body">
+        <div class="hl-body-inner">
+          <div class="hl-body-content">
+            <p class="hl-desc">Models exhibiting an irreversible shift of the Intertropical Convergence Zone (ITCZ) during a temperature overshoot show irreversible regional and seasonal water availability in tropical regions. Half a century of CO₂ stabilization after overshoot only halves these legacy effects for over 23% of the world population, making this a low-probability but high-impact outcome for human societies.</p>
+            <div class="hl-cite">
+              <p><strong>Steinert, N. J.</strong>, J. Schwinger, R. Chadwick, J.-S. Kug, H. Lee: Irreversible Land Water Availability Changes From a Potential ITCZ Shift During Temperature Overshoot. <span class="cite-journal">Earth's Future</span>, 13(5), e2024EF005787 (2025).</p>
+              <a class="hl-link" href="https://doi.org/10.1029/2024EF005787" target="_blank">
+                <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1029/2024EF005787
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 09 -->
+    <div class="hl-card open" onclick="toggleCard(this)">
+      <div class="hl-visual">
+        <img src="images/Nitzbon_et_al_2024.png" alt="Tipping elements overshoot figure">
+      </div>
+      <div class="hl-header">
+        <span class="hl-num">09</span>
+        <h2 class="hl-title">Permafrost-thaw impacts despite the absence of a global tipping point</h2>
+        <i class="ti ti-chevron-down hl-chevron" aria-hidden="true"></i>
+      </div>
+      <div class="hl-body">
+        <div class="hl-body-inner">
+          <div class="hl-body-content">
+            <p class="hl-desc">Despite feedbacks driving rapid and irreversible thaw at local to regional scales, the aggregated Arctic permafrost response to warming remains quasilinear, without a clear global peramfrost tipping point. This perspective argues that the absence of a global threshold provides no safety margin: every increment of warming exposes more land to thaw, producing continuous detrimental local impacts and incremental amplification of global carbon feedbacks.</p>
+            <div class="hl-cite">
+              <p>Nitzbon, J., T. Schneider von Deimling, M. Aliyeva, …, <strong>N. J. Steinert</strong>, …, M. Langer: No respite from permafrost-thaw impacts in the absence of a global tipping point. <span class="cite-journal">Nature Climate Change</span>, 14, 573–585 (2024).</p>
+              <a class="hl-link" href="https://doi.org/10.1038/s41558-024-02011-4" target="_blank">
+                <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1038/s41558-024-02011-4
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="hl-card open" onclick="toggleCard(this)">
+      <div class="hl-visual">
+        <img src="images/Steinert_et_al_2023.png" alt="Tipping elements overshoot figure">
+      </div>
+      <div class="hl-header">
+        <span class="hl-num">10</span>
+        <h2 class="hl-title">Evaluating permafrost definitions for global area estimates in CMIP6</h2>
+        <i class="ti ti-chevron-down hl-chevron" aria-hidden="true"></i>
+      </div>
+      <div class="hl-body">
+        <div class="hl-body-inner">
+          <div class="hl-body-content">
+            <p class="hl-desc">Permafrost area estimates from CMIP6 Earth system models of 15-21 million km² vary by up to 18 million km² depending solely on how permafrost presence is defined. This definition spread propagates into simulated permafrost-area soil carbon changes of up to 28%, highlighting a fundamental but largely overlooked source of uncertainty in projections of the permafrost carbon feedback.</p>
+            <div class="hl-cite">
+              <p><strong>Steinert, N. J.</strong>, M. V. Debolskiy, E. J. Burke, F. García-Pereira, H. Lee: Evaluating permafrost definitions for global permafrost area estimates in CMIP6 climate models. <span class="cite-journal">Environmental Research Letters</span>, 19(1), 014033 (2024).</p>
+              <a class="hl-link" href="https://doi.org/10.1088/1748-9326/ad10d7" target="_blank">
+                <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.1088/1748-9326/ad10d7
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="hl-card open" onclick="toggleCard(this)">
+      <div class="hl-visual">
+        <img src="images/Schwinger_et_al_2022.png" alt="Tipping elements overshoot figure">
+      </div>
+      <div class="hl-header">
+        <span class="hl-num">11</span>
+        <h2 class="hl-title">Earth system reversibility under temperature overshoots</h2>
+        <i class="ti ti-chevron-down hl-chevron" aria-hidden="true"></i>
+      </div>
+      <div class="hl-body">
+        <div class="hl-body-inner">
+          <div class="hl-body-content">
+            <p class="hl-desc">After temperature overshoot, most large-scale climate indicators such as surface temperature, marine and terrestrial productivity, AMOC strength, are reversible on centennialial timescales. However, irreversibility is found for permafrost carbon and deep ocean properties. No evidence of tipping points or self-reinforcing feedbacks could be found across the overshoot scenarios examined using the NorESM2-LM Earth System Model.</p>
+            <div class="hl-cite">
+              <p>Schwinger, J., A. Asaadi, <strong>N. J. Steinert</strong>, H. Lee: Emit now, mitigate later? Earth system reversibility under overshoots of different magnitude and durations. <span class="cite-journal">Earth System Dynamics</span>, 13, 1641–1665 (2022).</p>
+              <a class="hl-link" href="https://esd.copernicus.org/articles/13/1641/2022/" target="_blank">
+                <i class="ti ti-external-link" aria-hidden="true"></i> doi:10.5194/esd-13-1641-2022
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /highlights-grid -->
 
   <footer class="footer">
     <span>© 2026 Norman J. Steinert</span>
@@ -248,6 +499,12 @@
       <i class="ti ti-external-link" aria-hidden="true"></i>
     </a>
   </footer>
+
+  <script>
+    function toggleCard(card) {
+      card.classList.toggle('open');
+    }
+  </script>
 
 </body>
 </html>
